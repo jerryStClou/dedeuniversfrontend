@@ -1,0 +1,30 @@
+.searchName{
+    /* border: 2px solid black; */
+    width: 70%;
+    display: flex;
+    align-items: center;
+}
+
+
+.searchName input{
+    border: 1px solid black;
+    width: 71%;
+    margin-left: 3%;
+    height: 7vh;
+    border-radius: 9px;
+    font-size: 1em;
+    box-shadow: -5px 5px 5px rgba(38, 38, 38, 0.289);
+    padding-left: 3%;
+}
+
+.searchName .buttonSearch
+{
+    border: 2px solid white;
+    width: 25%;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+
+
+

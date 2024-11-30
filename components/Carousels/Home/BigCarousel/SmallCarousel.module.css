@@ -1,0 +1,79 @@
+.smallCarousel{
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 15%;
+    /* height: 48%; */
+    overflow: hidden;
+    /* position: relative; */
+    /* top: 17%;
+    left: 2%; */
+    background-color: white;
+    margin-left: 11%;
+    margin-right: 20%;
+    margin-top: 1%;
+    /* z-index: 10000; */
+}
+
+.allCardSmallCarousel{
+    width: 500%;
+    display: flex;
+}
+
+
+.cardSmallCarousel{
+    width: 33%;
+    /* width:33% */
+    /* border: 2px solid green; */
+    /* opacity: 1;
+    transition: all 1s ease-out; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+
+.cardSmallCarousel img ,.move1 img ,.move2 img,.move3 img, .move4 img {
+    width: 100%;
+}
+
+.move1{
+    width: 33%;
+    transform: translateX(-100%);
+    transition: all 1s ease-out;
+}
+
+
+.move2{
+    width: 33%;
+    transform: translateX(-200%);
+    transition: all 1s ease-out;
+}
+
+
+.move3{
+    width: 33%;
+    transform: translateX(-300%);
+    transition: all 1s ease-out;
+}
+
+
+.move4{
+    width: 33%;
+    transform: translateX(-400%);
+    transition: all 1s ease-out;
+}
+
+
+.move5{
+    width: 33%;
+    transform: translateX(-500%);
+    transition: all 1s ease-out;
+}
+
+
+
+.move6{
+    width: 33%;
+    transform: translateX(-600%);
+    transition: all 1s ease-out;
+}

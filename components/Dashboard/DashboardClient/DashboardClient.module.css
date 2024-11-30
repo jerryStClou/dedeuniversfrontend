@@ -1,0 +1,157 @@
+.invisible{
+    display: none;
+}
+
+.dashboardClient{
+    /* border: 2px solid black; */
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: auto;
+}
+
+.menuClient{
+    /* border: 2px solid black; */
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Nunito", sans-serif;
+    font-size: 1.2em;
+    margin: 2%;
+    cursor: pointer;
+}
+
+.imageMenuClient{
+    width: 100%;
+}
+
+.imageMenuClient img{
+    width: 100%;
+}
+
+
+
+.modal{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.578);
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  .modalElement{
+    width: 95%;
+    height: 95vh;
+    background-color: #ffffff;
+    border-radius: 10px;
+    position: fixed;
+    top: 2%;
+    left: 3%;
+    overflow: auto;
+  }
+  
+  
+  /*----------------------------------------------modalOrder------------------------------------------------*/
+
+  .modalOrder{
+    /* border: 2px solid black; */
+    width: 100%;
+    margin: auto;
+
+  }
+
+  .titleModalOrder{
+    font-family: "Nunito", sans-serif;
+    font-size: 1.4em;
+    margin:2%;
+  }
+
+  
+.backButton{
+    width: 10%;
+    height: 6vh;
+    cursor: pointer;
+    background-color: #2eb466;
+    border: 2px solid #2eb466;
+    border-radius: 5px;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    margin-left: 2%;
+    font-family: "Nunito", sans-serif;
+
+  }
+  
+  .allCards{
+    /* border: 2px solid blue; */
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+  }
+
+  .cardModalOrder{
+    width: 20%;
+    /* border: 2px solid blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Nunito", sans-serif;
+    font-size: 1.2em;
+    margin: 2%;
+    cursor: pointer;
+  }
+
+
+  .imageCardModalOrder{
+    width: 100%;
+  }
+
+  .cardModalOrder img{
+    width: 100%;
+  }
+
+  /* -------------------------------------------cardDetail-------------------------------- */
+
+  .cardDetail{
+    /* border: 2px solid green; */
+    
+  }
+
+
+  .cardComplete{
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+  .cardOrderDetail{
+    /* border: 2px solid black; */
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Nunito", sans-serif;
+    font-size: 1.2em;
+    margin-left: 2%;
+  }
+
+
+
+  .cardImageOrderDetail{
+    width: 100%;
+  }
+
+  .cardOrderDetail img{
+    width: 100%;
+  }
+
+  .infoOrderDetail{
+    /* border: 2px solid blue; */
+    width: 70%;
+    padding: 2%;
+    font-family: "Nunito", sans-serif;
+    font-size: 1.2em;
+  }

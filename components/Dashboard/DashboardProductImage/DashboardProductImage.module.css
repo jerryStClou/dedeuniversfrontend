@@ -1,0 +1,91 @@
+.DashboardImageProduit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .boutonAjoutSousCategorie {
+    width: 30%;
+    height: 10vh;
+    border: 2px solid rgb(82, 209, 218);
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-bottom: 2%;
+    margin-top: 2%;
+  }
+  
+  .boutonAjoutSousCategorie:hover {
+    border-color: #0b5459;
+    background-color: #0b5459;
+    color: white;
+  }
+  
+  .cardImage {
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid black; */
+    width: 30%;
+  }
+  
+  .boutonModifier {
+    border: 2px solid rgb(81, 209, 130);
+    background-color: rgb(81, 209, 130);
+    width: 100%;
+    height: 7vh;
+    border-radius: 0.3em;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 2%;
+  }
+  
+  .boutonModifier:hover {
+    border-color: rgb(11, 93, 43);
+    background-color: rgb(11, 93, 43);
+    color: white;
+  }
+  
+  .boutonSupprimer {
+    border: 2px solid rgba(223, 57, 57, 0.852);
+    background-color: rgba(223, 57, 57, 0.852);
+    width: 100%;
+    height: 7vh;
+    border-radius: 0.3em;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 2%;
+  }
+  
+  .boutonSupprimer:hover {
+    border-color: rgba(92, 23, 23, 0.852);
+    background-color: rgba(92, 23, 23, 0.852);
+    color: white;
+  }
+  
+  .boutonValiderImageProduit {
+    cursor: pointer;
+    width: 70%;
+    height: 7vh;
+    border-radius: 0.4em;
+    margin-top: 2%;
+    font-size: 1em;
+    border: 1px solid #d9c14c;
+    background-color: #d9c14c;
+  }
+  
+  .boutonValiderImageProduit:hover {
+    background-color: #6c5f1b;
+    border-color: #6c5f1b;
+    color: white;
+  }
+  
+.modalBackground{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.32);
+  z-index: 2;
+}

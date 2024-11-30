@@ -1,0 +1,373 @@
+.invisible{
+    display: none;
+  }
+  
+  .CardsProductDashboard {
+    /* border:2px solid green; */
+    margin-top: 2%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .cardProductDashboard {
+    width: 30%;
+    /* border: 2px solid #585858; */
+    margin: 1%;
+    border-radius: 4px;
+  }
+  
+  .cardImageDashboard {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .cardImageDashboard img {
+    width: 50%;
+  }
+  
+  .cardInfoDashboard {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .titleStyleCardDasboard {
+    font-size: 1.6em;
+    /* color: #3d3d3d; */
+    color: black;
+    font-family: "Nunito", sans-serif;
+    font-weight: bold;
+  }
+  
+  
+  
+  .cardInfoDashboard button {
+    width: 60%;
+    height: 6vh;
+    cursor: pointer;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    font-size: 1em;
+    border-radius: 6px;
+    }
+  
+     
+    .cardInfoDashboard button:hover{
+      box-shadow: 2px 2px 2px 2px #31313089;
+    }
+    
+    
+    .infoButton{
+      border: 2px solid #566E0E;
+      background-color: #566E0E;
+      color: white;
+    }
+    
+   
+    
+    .editButton{
+      border: 2px solid #485E7A;
+      background-color: #485E7A;
+      color: white;
+    }
+  
+    
+    
+    .deleteButton{
+      border: 2px solid #700D11;
+      background-color: #700D11;
+      color: white;
+    }
+    
+  
+  
+  .descriptionStyleCardDasboard {
+    font-size: 1em;
+    color: #3d3d3d;
+    padding: 1%;
+  }
+  
+  .priceStyleCardDasboard {
+    font-size: 2em;
+    font-weight: bold;
+    color: #3d3d3d;
+  }
+  
+  .stockStyleCardDasboard {
+    border: 1px solid #5fd896af;
+    background-color: #5fd896af;
+    font-size: 1.2em;
+    color: #3d3d3d;
+    padding: 3%;
+  }
+  
+  .modifStyleDasboard {
+    width: 30%;
+    height: 5.5vh;
+    cursor: pointer;
+    font-size: 1.1em;
+    border-radius: 4px;
+    margin-top: 1%;
+    background-color: #f4d040d2;
+    border: 1px solid #f4d040d2;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+  
+  .modifStyleDasboard:hover {
+    border-color: #76641ad2;
+    background-color: #76641ad2;
+    color: white;
+  }
+  
+  .deleteStyleDasboard {
+    width: 30%;
+    height: 5.5vh;
+    cursor: pointer;
+    font-size: 1.1em;
+    border-radius: 4px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background-color: #f3380edc;
+    border: 1px solid #f3380edc;
+  }
+  
+  .deleteStyleDasboard:hover {
+    border-color: #87210adc;
+    background-color: #87210adc;
+    color: white;
+  }
+  
+  .modal{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.578);
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  .modalElement{
+    width: 95%;
+    height: 95vh;
+    background-color: #ffffff;
+    border-radius: 10px;
+    position: fixed;
+    top: 2%;
+    left: 3%;
+    overflow: auto;
+  }
+  
+  
+  
+  
+  /* -------------------------------------------------infoModal---------------------------------------- */
+  
+  .infoModal{
+    /* border: 2px solid black; */
+    width: 100%;
+    height: 100%;
+    padding: 1%;
+    font-family: "Nunito", sans-serif;
+    font-size: 1.2em;
+  }
+  
+  .backButton{
+    width: 10%;
+    height: 6vh;
+    cursor: pointer;
+    background-color: #2eb466;
+    border: 2px solid #2eb466;
+    border-radius: 5px;
+    margin-bottom: 2%;
+    font-family: "Nunito", sans-serif;
+  }
+  
+  .infoModal p{
+    margin: 2%;
+  }
+  
+  .elementInfoModal{
+    /* border: 2px solid green; */
+    display: flex;
+  }
+  
+  .modalProduct{
+    width: 30%;
+    /* border: 2px solid purple; */
+    margin-left: 2%;
+    /* height: 45vh; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .modalProduct img{
+    width: 50%;
+  }
+  
+  .infoModalProduct{
+    /* border: 2px solid black; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .infoModalProduct button{
+    width: 80%;
+    background-color: #C3C3C3;
+    border: 1px solid #C3C3C3;
+    font-size: 0.9em;
+    height: 6vh;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 2%;
+    font-family: "Nunito", sans-serif;
+  }
+  
+  .paragraphModal{
+    /* border: 2px solid black; */
+    width: 70%;
+    height: 80vh;
+  }
+  
+  .contentParagrapheModal{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .profilUser{
+  display: flex;
+  /* border: 2px solid blue; */
+  width: 45%;
+  height: 20vh;
+  }
+  
+  .imageProfil{
+    width: 30%;
+  }
+  
+  .imageProfil img{
+    width: 100%;
+  }
+  
+  .infoProfilUser{
+    /* border: 2px solid black; */
+    width: 70%;
+  }
+  
+  
+  /* -----------------------------------------------------deleteModal--------------------------------------------------- */
+  
+  .deleteModal{
+    margin-top: 2%;
+    /* border: 2px solid blue; */
+    padding: 1%;
+  }
+  
+  .deleteElementProduct{
+    /* border: 2px solid burlywood; */
+    display: flex;
+    justify-content: center;
+    margin-top:10%;
+  }
+  
+  .deleteModalProduct{
+    /* border: 2px solid brown; */
+    display: flex;
+    flex-direction: column;
+    /* align-items: end; */
+    width: 20%;
+    margin-right: 3%;
+  }
+  
+  .deleteModalProduct p{
+    font-family: "Nunito", sans-serif;
+    font-size: 1.2em;
+  }
+  
+  .imageDeleteModal{
+    width: 70%;
+  }
+  
+  .imageDeleteModal img{
+    width: 100%;
+  }
+  
+  .alertMessage{
+  /* border: 2px solid black; */
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.2em;
+  margin-bottom: 1%;
+  margin-left: 8%;
+  }
+  
+  .alertMessage button{
+    width: 80%;
+    height: 7vh;
+    border: 1px solid #700D11;
+    background-color: #700D11;
+    font-family: "Nunito", sans-serif;
+    font-size: 1.2em;
+    color: white;
+    cursor: pointer;
+  
+  }
+  
+  
+  
+  /* ------------------------------------------editModal-------------------------------------------- */
+  
+  .editModal{
+    padding: 2%;
+  }
+  
+  .editForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 2px solid black; */
+    width: 70%;
+    margin: auto;
+  }
+  
+  .editForm input{
+    margin: 2%;
+    width: 80%;
+    height: 6vh;
+    font-size: 1.1em;
+    /* border-radius: 3px; */
+  }
+  
+  .editForm textarea{
+    width: 80%;
+    height: 20vh;
+    margin: 2%;
+    font-size: 1.1em;
+    font-family: "Nunito", sans-serif;
+  }
+  
+  .editForm button{
+    width: 30%;
+    height: 7vh;
+    cursor: pointer;
+    margin: 2%;
+    border-radius: 4px;
+    font-size: 1.1em;
+    font-family: "Nunito", sans-serif;
+      border:1px solid #a67f1e;
+      background-color:#a67f1e;
+  
+  }

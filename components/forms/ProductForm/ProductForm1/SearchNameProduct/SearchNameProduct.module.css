@@ -1,0 +1,50 @@
+
+.trieCategorieParNomCateg{
+    /* border: 2px solid black; */
+    width: 50%;
+    display: flex;
+    align-items: end;
+}
+
+.trieCategorieParNomCateg input{
+    width: 99%;
+    height: 5vh;
+    border: 2px solid black;
+}
+
+.trieCategorieParNomCateg button{
+    width: 30%;
+    cursor: pointer;
+    height: 6vh;
+    background-color: #7092BE;
+    border: 1px solid #7092BE;
+    font-size: 1em;
+}
+
+
+.trieCategorieParNomCateg button:hover{
+    background-color: #204147;
+    border-color: #204147;
+    color: white;
+}
+
+
+.divCategSearchByName{
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid black; */
+    width: 65%;
+    margin-left: 2%;
+}
+
+.divCategSearchByName label{
+    margin-bottom:1%;
+    font-size: 1.1em;
+}
+
+
+.errorStyle
+{
+	color:red;
+	font-size: 1.1em;
+}

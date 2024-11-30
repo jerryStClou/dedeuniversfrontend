@@ -1,0 +1,18 @@
+.deleteStyleDasboard {
+    width: 30%;
+    height: 5.5vh;
+    cursor: pointer;
+    font-size: 1.1em;
+    border-radius: 4px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background-color: #f3380edc;
+    border: 1px solid #f3380edc;
+  }
+  
+  .deleteStyleDasboard:hover {
+    border-color: #87210adc;
+    background-color: #87210adc;
+    color: white;
+  }
+  

@@ -1,0 +1,135 @@
+.DashboardSousCategorie{
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    align-items: center;
+}
+
+.pIntroDashboardSousCategorie{
+    font-size: 1.2em;
+    color: #616161;
+}
+
+.boutonAjoutSousCategorie{
+    width: 30%;
+    height: 10vh;
+    border: 2px solid rgb(82, 209, 218);
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    
+}
+
+.boutonAjoutSousCategorie:hover{
+    border-color: #0b5459;
+    background-color: #0b5459;
+    color: white;
+}
+
+.pOu{
+    font-size: 1.2em;
+    color: #616161;
+}
+
+.pPropositionList{
+    font-size: 1.2em;
+    color: #616161;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+
+.cardsDashboardSousCategorie{
+    /* border: 2px solid black; */
+    width: 85%;
+}
+
+.cardDashboardSousCategorie{
+    border: 2px solid #43e1ed;
+    padding: 1%;
+    display: flex;
+    width: 100%;
+}
+
+.imageCardDashboardSousCategorie{
+    width: 30%;
+}
+
+.imageCardDashboardSousCategorie p{
+    width: 100%;
+    font-size: 1.2em;
+    margin: 2%;
+}
+
+
+.imageCardDashboardSousCategorie label{
+font-weight: bold;
+}
+.infoCardDashboardSousCategorie{
+    /* border: 2px solid green; */
+    width: 65%;
+    margin-left: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.infoCardDashboardSousCategorie p{
+    font-size: 1.2em;
+    color: #616161;
+    margin-bottom: 2%;
+}
+
+
+
+.boutonsCardDashboardSousCategorie{
+    /* border: 2px solid red; */
+    width: 100%;
+}
+
+.boutonsCardDashboardSousCategorie button{
+    width: 30%;
+    height: 7vh;
+    border-radius: 0.3em;
+    cursor: pointer;
+    font-size: 1em;
+    margin-right: 2%;
+}
+
+.boutonSelectionner{
+    border: 2px solid rgb(94, 171, 213);
+    background-color: rgb(94, 171, 213);
+}
+
+.boutonSelectionner:hover{
+    border-color: rgb(20, 63, 86);
+    background-color: rgb(20, 63, 86);
+    color: white;
+}
+
+.boutonModifier{
+    border: 2px solid rgb(81, 209, 130);
+    background-color: rgb(81, 209, 130);
+}
+
+.boutonModifier:hover{
+    border-color: rgb(11, 93, 43);
+    background-color: rgb(11, 93, 43);
+    color: white;
+}
+
+.boutonSupprimer{
+    border: 2px solid rgba(223, 57, 57, 0.852);
+    background-color: rgba(223, 57, 57, 0.852);
+
+}
+
+.boutonSupprimer:hover{
+    border-color: rgba(92, 23, 23, 0.852);
+    background-color: rgba(92, 23, 23, 0.852);
+    color: white;
+}

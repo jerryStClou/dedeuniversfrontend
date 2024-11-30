@@ -1,0 +1,117 @@
+.bigCarousel{
+    /* border: 2px solid green; */
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+}
+
+.bigCarousel img{
+    width: 100%;
+}
+
+.allCardsBigCarousel{
+    /* border: 2px solid pink; */
+    height: 100vh;
+    width: 600%;
+    display: flex;
+}
+
+.cardBigCarousel{
+    /* border: 2px solid green; */
+    width: 16.65%;
+    height: 100vh;
+}
+
+
+.move1{
+    width: 16.65%;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: all 1s ease-out;
+}
+
+
+.move2{
+    width: 16.65%;
+    transform: translateX(-200%);
+    transition: all 1s ease-out;
+}
+
+
+.move3{
+    width:16.65%;
+    transform: translateX(-300%);
+    transition: all 1s ease-out;
+}
+
+
+.move4{
+    width:16.65%;
+    transform: translateX(-400%);
+    transition: all 1s ease-out;
+}
+
+
+.move5{
+    width: 16.65%;
+    transform: translateX(-500%);
+    transition: all 1s ease-out;
+}
+/* -----------------------------------------allButtonsBigCarousel------------------------------------- */
+
+.allButtonsBigCarousel{
+    /* border: 2px solid black; */
+    z-index: 6;
+    position: absolute;
+    top: 90%;
+    left: 5%;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
+
+.allRoundButtons{
+    /* border: 2px solid grey; */
+    width: 70%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.activeRoundButton{
+    width: 5%;
+    height: 6vh;
+    border: 1px solid rgb(47, 75, 60);
+    border-radius: 50%;
+    background-color: rgb(47, 75, 60);
+    cursor: pointer;
+
+}
+
+.roundButton{
+    
+    width: 5%;
+    height: 6vh;
+    border: 3px solid rgb(47, 75, 60);
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+.buttonMoveCarousel{
+    margin-left: 4%;
+    margin-right: 4%;
+    width: 4%;
+    cursor: pointer;
+    background-color: #47895f;
+    border: 1px solid #47895f;
+    border-radius: 5px;
+}
+.buttonMoveCarousel:hover{
+    background-color: #082d16;
+    border-color: #082d16;
+    color: white;
+}

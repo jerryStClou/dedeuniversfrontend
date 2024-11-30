@@ -1,0 +1,20 @@
+.buttonNavBar{
+    width: 15%;
+    height: 6vh;
+    cursor: pointer;
+    background: black;
+    color: white;
+    border-radius: 6px;
+    box-shadow: 2px 2px 20px 5px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    position: absolute;
+    top: 0%;
+    left:9%;
+    z-index: 3;
+}
+
+
+.buttonNavBar.animating {
+    opacity: 0;
+    transform: scale(0.8); /* Réduit la taille pendant l'animation */
+  }

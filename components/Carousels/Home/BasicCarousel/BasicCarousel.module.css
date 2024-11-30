@@ -1,0 +1,434 @@
+.basicCarousel{
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.moveButtonCarousel{
+    border: 3px solid #084F68;
+    width: 5%;
+    height: 10vh;
+    border-radius: 50%;
+    margin: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color:#084F68;
+    
+}
+
+.moveButtonCarousel:hover{
+    background-color: #084F68;
+    border-color: #084F68;
+    color: white;
+}
+
+.moveButtonCarousel img{
+    width: 58%;
+}
+
+
+
+.cardCarouselDiv{
+    width: 85%;
+    /* border: 2px solid black; */
+    overflow: hidden;
+}
+
+.allCardCarousel{
+    width: 500%;
+    display: flex;
+    align-items: center;
+}
+
+
+
+/*----------------------------------------------Basic Card -----------------------------------------*/
+
+
+.basicCard{
+    /* border: 2px solid black; */
+    width: 4%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 1s ease-out;
+}
+
+.imageCardCarousel{
+    width: 100%;
+    /* border: 2px solid black; */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.allImageCard{
+    width: 400%;
+    display: flex;
+}
+
+.imageCard{
+    width: 25%;
+    /* border: 2px solid green; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imageCard img{
+    width: 100%;
+}
+
+.infoCard{
+    border: 2px solid black;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1%;
+    margin-top: 2%;
+    padding: 2%;
+}
+
+.infoCard p{
+    font-size: 1.1em;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.allCardButtons{
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.allCardButtons button{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.activeCardButton{
+    background-color: black;
+    border: 1px solid black;
+}
+
+.cardButton{
+    border: 2px solid #EBEBEB;
+    background-color: #EBEBEB;
+}
+
+.note{
+    /* border: 1px solid green; */
+    width: 90%;
+    margin-left: 2%;
+    margin-right: 2%;
+    display: flex;
+    justify-content: center;
+}
+
+.note img{
+    width: 10%;
+    margin-left: 1%;
+    margin-right: 1%;
+    /* cursor: pointer; */
+}
+
+
+.addCartButton{
+    width: 80%;
+    height: 5vh;
+    cursor: pointer;
+    border: 2px solid #696620;
+    border-radius: 5px;
+    background-color: #696620;
+    font-size: 1.1em;
+}
+
+.addCartButton:hover{
+    box-shadow: 2px 2px 2px 2px #00000049;
+    background-color: #8d8910;
+    border-color: #8d8910;
+}
+
+.startButtonActive{
+    cursor: pointer;
+    background-color: green;
+}
+
+/* --------------------------------------------Move style----------------------------------------------------------- */
+
+.move1{
+
+    /* border: 2px solid black; */
+    width: 4%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 1s ease-out;
+    transform: translateX(-245px);
+}
+
+
+.move2{
+
+    /* border: 2px solid black; */
+    width: 4%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 1s ease-out;
+    transform: translateX(-523px);
+}
+
+
+.move3{
+
+    /* border: 2px solid black; */
+    width: 4%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 1s ease-out;
+    transform: translateX(-800px);
+}
+
+
+
+.move4{
+
+    /* border: 2px solid black; */
+    width: 4%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 1s ease-out;
+    transform: translateX(-1100px);
+}
+
+/* -------------------------------------------------------Responsives----------------------------------------------------*/
+
+
+@media screen and (max-width: 895px) {
+        .basicCard{
+            width: 4.6%;
+            margin-left: 1%;
+            margin-right: 1%;
+        }
+        
+        .move1{
+            width: 4.6%;
+            margin-left: 1%;
+            margin-right: 1%;
+        }
+
+        
+        .move2{
+            width: 4.6%;
+            margin-left: 1%;
+            margin-right: 1%;
+            transform: translateX(-480px);
+        }
+
+        
+        .move3{
+            width: 4.6%;
+            margin-left: 1%;
+            margin-right: 1%;
+            transform: translateX(-700px);
+        }
+
+        
+        .move4{
+            width: 4.6%;
+            margin-left: 1%;
+            margin-right: 1%;
+            transform: translateX(-1110px);
+        }
+
+        
+        .infoCard p{
+            font-size: 0.9em;
+            margin-top: 3%;
+            margin-bottom: 3%;
+        }
+        
+        .addCartButton{
+            font-size: 0.89em;
+        }
+        .addCartButton{
+            width: 95%;
+        }
+        .moveButtonCarousel{
+            width: 50px;
+            height: 50px;
+        }
+        
+}
+
+
+@media screen and (max-width: 658px) {
+
+    .basicCard{
+        width: 6%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    
+    .move1{
+        width: 6%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    
+    .move2{
+        width: 6%;
+        margin-left: 2%;
+        margin-right: 2%;
+        transform: translateX(-480px);
+    }
+
+    
+    .move3{
+        width: 6%;
+        margin-left: 2%;
+        margin-right: 2%;
+        transform: translateX(-760px);
+    }
+
+    
+    .move4{
+        width: 6%;
+        margin-left: 2%;
+        margin-right: 2%;
+        transform: translateX(-1310px);
+    }
+
+
+    
+.allCardButtons button{
+    width: 10px;
+    height: 10px;
+}
+ 
+}
+
+
+@media screen and (max-width: 494px) {
+
+    .basicCard{
+        width: 6.8%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    
+    
+    .move1{
+        width: 6.8%;
+        margin-left: 2%;
+        margin-right: 2%;
+        transform: translateX(-230px);
+    }
+
+    
+    .move2{
+        width: 6.8%;
+        margin-left: 2%;
+        margin-right: 2%;
+        transform: translateX(-420px);
+    }
+
+    
+    .move3{
+        width: 6.8%;
+        margin-left: 2%;
+        margin-right: 2%;
+        transform: translateX(-830px);
+    }
+
+    
+    .move4{
+        width: 6.8%;
+        margin-left: 2%;
+        margin-right: 2%;
+        transform: translateX(-1240px);
+    }
+
+    .note img{
+        width: 10%;
+    }
+ 
+    .infoCard p{
+        font-size: 0.7em;
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
+
+    
+    .addCartButton{
+        font-size: 0.7em;
+    }
+    
+}
+
+
+
+@media screen and (max-width: 329px) {
+
+    .basicCard{
+        width: 11%;
+        margin-left: 4%;
+        margin-right: 4%;
+    }
+
+    
+    
+    .move1{
+        width: 11%;
+        margin-left: 4%;
+        margin-right: 4%;
+        transform: translateX(-250px);
+    }
+
+    
+    .move2{
+        width: 11%;
+        margin-left: 4%;
+        margin-right: 4%;
+        transform: translateX(-420px);
+    }
+
+    
+    .move3{
+        width: 11%;
+        margin-left: 4%;
+        margin-right: 4%;
+        transform: translateX(-830px);
+    }
+
+    
+    .move4{
+        width: 11%;
+        margin-left: 4%;
+        margin-right: 4%;
+        transform: translateX(-1240px);
+    }
+
+}
