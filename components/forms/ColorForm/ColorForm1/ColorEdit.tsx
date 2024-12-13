@@ -17,13 +17,22 @@ interface PropsColorForm {
 
 export default function ColorEdit({onClick, onColorAdded, colorId}:PropsColorForm){
     
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
     const [colorProduct, setColorProduct] = useState<Color>();
 
     useEffect(() => {
         const fetchColor = async () => {
           try {
             const response = await axios.get(
-              "http://localhost:9196/api/color/"+colorId
+              "http://localhost:9197/api/color/"+colorId,
+              {
+                withCredentials: true,  // Ajout de cette option pour envoyer les cookies
+              }
             );
             setColorProduct(response.data);
             console.log(response.data);
@@ -56,9 +65,16 @@ export default function ColorEdit({onClick, onColorAdded, colorId}:PropsColorFor
 
   async function updateColor(data:Color) {
     try {
-      const response = await axios.post(
-        "http://localhost:9196/api/color/update/"+colorId,
-        data
+      const csrfToken = await fetchTokenCsrf();
+      const response = await axios.put(
+        "http://localhost:9197/api/color/update/"+colorId,
+        data,
+        {
+            withCredentials: true,  // Pour envoyer les cookies avec la requête
+            headers: {
+                'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+            }
+        }
       );
       console.log("couleur ajouté avec succès:", response.data.id);
       onColorAdded(); // Appelez cette fonction après l'ajout de la catégorie

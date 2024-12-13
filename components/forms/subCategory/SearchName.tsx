@@ -26,8 +26,8 @@ const { register, handleSubmit, formState: { errors } } = useForm<SearchFormData
 
 const onSubmit = (data: SearchFormData) => {
   // Redirection vers la page subCategory avec le nom de la sous-catégorie
-  router.push(`subCategory?name=${encodeURIComponent(data.nameSubCategory)}`);
-};
+  router.push(`subCategory/${encodeURIComponent(data.nameSubCategory)}`);
+}; 
 
 
 

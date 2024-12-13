@@ -19,11 +19,20 @@ export default function ProductEdit({onClick, onProductAdded, productId }:PropsP
 
     const [product, setProduct] = useState<Product>();
 
+    const fetchTokenCsrf = async () => {
+      const response = await axios.get("http://localhost:9197/api/csrf-token", {
+        withCredentials: true,
+    });
+      return response.data.csrfToken;
+  };
     useEffect(() => {
         const fetchProduct = async () => {
           try {
             const response = await axios.get(
-              "http://localhost:9196/api/product/"+productId
+              "http://localhost:9196/api/product/"+productId,
+              {
+                withCredentials: true,  // Ajout de cette option pour envoyer les cookies
+              }
             );
             setProduct(response.data);
             console.log(response.data);
@@ -68,8 +77,15 @@ export default function ProductEdit({onClick, onProductAdded, productId }:PropsP
   
     async function updateProduct(data:Product) {
       try {
-        const response = await axios.post(
-          "http://localhost:9196/api/product/update/"+productId,data
+        const csrfToken = await fetchTokenCsrf();
+        const response = await axios.put(
+          "http://localhost:9197/api/product/update/"+productId,data,
+          {
+              withCredentials: true,  // Pour envoyer les cookies avec la requête
+              headers: {
+                  'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+              }
+          }
           
         );
         // console.log(data);
@@ -82,6 +98,10 @@ export default function ProductEdit({onClick, onProductAdded, productId }:PropsP
   
     return (
       <>
+      
+    <div className={classes.categoryForm}>
+      <button onClick={onClick} className={classes.buttonBack}>retour</button>
+
       <form
         className={classes.formulaireContact}
         onSubmit={handleSubmit(updateProduct)}
@@ -155,6 +175,7 @@ export default function ProductEdit({onClick, onProductAdded, productId }:PropsP
   
         <button className={classes.buttonStyleContact}>Ajouter</button>
       </form>
+      </div>
       </>
     );
   }

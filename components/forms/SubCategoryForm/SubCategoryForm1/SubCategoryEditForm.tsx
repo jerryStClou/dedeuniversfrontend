@@ -2,7 +2,7 @@
 "use client"; // 
 
 
-import classes from "./SubCategoryForm1.module.css";
+import classes from "@/styles/FormStyle/FormStyle1.module.css";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,12 +24,10 @@ export default function SubCategoryEditForm({subCategoryId,onClick, onSubCategor
     .string()
     .min(2, {
       message: "Le nom de la categorie doit contenir au moins 2 lettres",
-    })
-    .regex(
-      /^[a-zA-Z\u00C0-\u00FF\s]*$/,
-      "Le nom de la catégorie ne doit contenir que des lettres et des espaces"
-    ),
+    }),
+    imageSubCategory:z.string()
 });
+
   const {
     register,
     handleSubmit,
@@ -43,7 +41,7 @@ export default function SubCategoryEditForm({subCategoryId,onClick, onSubCategor
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:9196/api/subCategory/"+subCategoryId
+          "http://localhost:9197/api/subCategory/"+subCategoryId,{withCredentials: true}
         );
         setSubCategory(response.data);
         console.log(response.data);
@@ -60,8 +58,25 @@ export default function SubCategoryEditForm({subCategoryId,onClick, onSubCategor
 
   async function EditSubCategory(data:SubCategory) {
     try {
+          // Récupérer le token CSRF depuis le cookie
+          const csrfToken = document.cookie
+          .split(';')
+          .find(cookie => cookie.trim().startsWith('XSRF-TOKEN='))?.split('=')[1];
+
+      if (!csrfToken) {
+          console.error("Token CSRF manquant");
+          return;
+      }
+
+  console.log("Token CSRF envoyé:", csrfToken);
       const response = await axios.put(
-        "http://localhost:9196/api/subCategory/update/"+subCategoryId,data
+        "http://localhost:9197/api/subCategory/update/"+subCategoryId,data,
+        {
+            withCredentials: true,  // Pour envoyer les cookies avec la requête
+            headers: {
+                'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+            }
+        }
       );
       console.log("La sous categorie à été ajouté avec succès:", response.data.id);
       onSubCategoryAdded();
@@ -93,6 +108,23 @@ export default function SubCategoryEditForm({subCategoryId,onClick, onSubCategor
         />
         <p className={classes.errorStyle}>{errors.nameSubCategory?.message}</p>
       </div>
+
+      
+      
+      <div className={classes.inputDivStyle}>
+        <label htmlFor="imageSubCategory">Modifier le chemin de l'image de la sous catégorie</label>
+        <input
+          type="text"
+          placeholder={subCategory?.imageSubCategory}
+          {...register("imageSubCategory")}
+          id="imageSubCategory"
+          className={
+            errors.imageSubCategory ? classes.inputError : classes.inputStyle
+          }
+        />
+        <p className={classes.errorStyle}>{errors.imageSubCategory?.message}</p>
+      </div>
+
 
       <button className={classes.buttonStyleContact}>
         Modifier une sous catégorie

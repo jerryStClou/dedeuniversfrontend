@@ -16,6 +16,12 @@ interface PropsMaterialForm {
 
 export default function MaterialForm({onClick, onMaterialAdded, idProduct}:PropsMaterialForm){
     
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
   const materialSchema = z.object({
     material: z
       .string()
@@ -39,9 +45,17 @@ export default function MaterialForm({onClick, onMaterialAdded, idProduct}:Props
 
   async function addMaterial(data:Material) {
     try {
+      
+      const csrfToken = await fetchTokenCsrf();
       const response = await axios.post(
-        "http://localhost:9196/api/material/add/"+idProduct,
-        data
+        "http://localhost:9197/api/material/add/"+idProduct,
+        data,
+        {
+            withCredentials: true,  // Pour envoyer les cookies avec la requête
+            headers: {
+                'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+            }
+        }
       );
       console.log("couleur ajouté avec succès:", response.data.id);
       onMaterialAdded(); // Appelez cette fonction après l'ajout de la catégorie

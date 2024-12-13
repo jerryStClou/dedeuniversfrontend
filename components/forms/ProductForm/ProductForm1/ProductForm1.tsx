@@ -14,8 +14,14 @@ type PropsProductForm = {
   idSubCategory: number;
 };
 
-export default function ProductForm1({onClick, onProductAdded, idSubCategory }:PropsProductForm){
+export default function ProductForm1({onClick, onProductAdded, idSubCategory}:PropsProductForm){
 
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
   const addProductSchema = z.object({
     nameProduct: z
       .string()
@@ -47,8 +53,15 @@ export default function ProductForm1({onClick, onProductAdded, idSubCategory }:P
 
   async function addProduct(data:Product) {
     try {
+      const csrfToken = await fetchTokenCsrf();
       const response = await axios.post(
-        "http://localhost:9196/api/product/add/"+idSubCategory,data
+        "http://localhost:9197/api/product/add/"+idSubCategory,data,
+        {
+            withCredentials: true,  // Pour envoyer les cookies avec la requête
+            headers: {
+                'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+            }
+        }
         
       );
       // console.log(data);

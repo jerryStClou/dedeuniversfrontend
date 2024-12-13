@@ -13,6 +13,12 @@ interface PropsProductImages {
   
 export default function ProductImageEdit({onClick, productImagesId, dashProImg}:PropsProductImages){
     
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
     const imageProduitSchema = z.object({
         productImages: z.string(),
         typeProductImages: z
@@ -36,9 +42,16 @@ export default function ProductImageEdit({onClick, productImagesId, dashProImg}:
 
       async function editImageProduit(data:ProductImages) {
         try {
+          const csrfToken = await fetchTokenCsrf();
           const response = await axios.put(
-            "http://localhost:9196/api/productImage/update/"+productImagesId,
-            data
+            "http://localhost:9197/api/productImage/update/"+productImagesId,
+            data,
+            {
+                withCredentials: true,  // Pour envoyer les cookies avec la requête
+                headers: {
+                    'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+                }
+            }
           );
           console.log(response);
           console.log("l'image du produit à été modifier avec succès:", response.data.id);

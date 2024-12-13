@@ -1,36 +1,253 @@
 import { useEffect, useState } from "react";
-import Link from 'next/link';
+// import Link from 'next/link';
 import classes from "./CardsProductDashboard.module.css";
-import axios from "axios";
+// import axios from "axios";
 import BoutonComponentDelete from "./BoutonComponentDelete/BoutonComponentDelete";
 import image from "../../../../assets/card/19.png";
 import ModalDelete from "./ModalDelete";
 import ModalInfo from "./ModalInfo";
 import ModalEdit from "./ModalEdit";
-import { Product } from "@/types/types";
+// import { Product } from "@/types/types";
+
+
+
+
+export interface Category {
+  id: number;
+  nameCategory: string;
+}
+
+export interface SubCategory {
+  id: number;
+  nameSubCategory: string;
+  imageSubCategory:string;
+}
+
+export interface ProductImages{
+  id:number;
+  productImages:string;
+  typeProductImages:string;
+  product:null;
+}
+
+
+
+export interface Product {
+  id: number;
+  nameProduct: string;
+  description: string;
+  stock: number;
+  basePrice: number;
+  baseWeight: number;
+  subCategory: SubCategory;
+ productImages:ProductImages[];
+ comments:Comment[];
+ productOptions:ProductOption[];
+  // ajouter d'autres propriétés nécessaires
+}
+
+export interface ProductOption{
+  id:number;
+  product:null;
+  size:ProductSize;
+  color:Color;
+  material:Material;
+
+}
+
+export interface Role{
+  id:number;
+  role:string;
+}
+
+export interface User{
+  id:number;
+  lastname:string;
+  firstname:string;
+  pseudo:string;
+  imageProfil:string;
+  email:string;
+  password:string;
+  role: Role
+}
+
+export interface Comment{
+  id:number;
+  comment:string;
+  titleComment:string;
+  note:number;
+  imageComment:string;
+  user:{
+    imageProfil:string
+  };
+  product:null;
+  createdAt: Date;  // Ajout du type Date pour createdAt
+  updatedAt: Date;  // Ajout du type Date pour updatedAt
+
+}
+
+
+
+export interface Color{
+  id:number;
+  color:string;
+
+}
+
+
+export interface Material{
+  id:number;
+  material:string;
+  influenceMaterialPrice:number;
+  influenceMaterialWeight:number;
+
+}
+
+
+export interface ProductSize{
+  id:number;
+  productSize:string;
+  influenceProductSizePrice:number;
+  influenceProductSizeWeight:number;
+
+}
+
+
+export interface CartProduct extends Product {
+quantity: number;
+}
+
+
+export interface Address{
+id:number;
+city:string;
+street:string;
+postalCode:string;
+}
+
+export interface Promotion{
+id:number;
+code:string;
+description:string;
+discountPercentage:number;
+discountValue:number;
+usageLimit:number;
+usageCount:number;
+isFirstPurchaseOnly:boolean;
+type:string;
+requiredLoyaltyPoints:number;
+startDate: Date; 
+endDate: Date; 
+}
+
+
+export interface ProductPromotion{
+id:number;
+product:Product;
+promotion:Promotion;
+}
+
+
+export interface EmailVerification{
+email:string;
+}
 
 export default function CardsProductDashboard() {
 
   const [modale,setModale]=useState(false);
   const [modalElement,setModalElement]=useState("");
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([
+    {
+      "id":1,
+      "nameProduct":"casque football américain",
+      "description":"casque football américain",
+      "basePrice":78,
+      "baseWeight":89,
+      "stock":45,
+      "subCategory":{
+        "id":1,
+        "nameSubCategory":"micro",
+        "imageSubCategory":"aaa"
+      },
+      "comments":[{
+        "id":1,
+        "comment":"produit cool",
+        "note":5,
+        "titleComment":"produit ouf",
+        "updatedAt": new Date(2024, 0, 1),
+        "createdAt":new Date(2024, 0, 1),
+        "imageComment":"image",
+        "user":{
+          "imageProfil":"yellow"
+        },
+        "product":null
+      }],
+      "productImages":[
+        {
+          "id":1,
+          "productImages":"https://www.spiralfootball.fr/1931-thickbox_default/casque-football-americain-riddell-speed-icon-taille-xl.jpg",
+          "typeProductImages":"card",
+          "product":null
+        }
+      ],
+      "productOptions":[]
+     },
+     {
+      "id":2,
+      "nameProduct":"casque football américain",
+      "description":"casque football américain",
+      "basePrice":78,
+      "baseWeight":89,
+      "stock":45,
+      "subCategory":{
+        "id":1,
+        "nameSubCategory":"micro",
+        "imageSubCategory":"aaa"
+      },
+      "comments":[{
+        "id":1,
+        "comment":"produit cool",
+        "note":5,
+        "titleComment":"produit ouf",
+        "updatedAt": new Date(2024, 0, 1),
+        "createdAt":new Date(2024, 0, 1),
+        "imageComment":"image",
+        "user":{
+          "imageProfil":"yellow"
+        },
+        "product":null
+      }],
+      "productImages":[
+        {
+          "id":1,
+          "productImages":"https://www.spiralfootball.fr/1931-thickbox_default/casque-football-americain-riddell-speed-icon-taille-xl.jpg",
+          "typeProductImages":"card",
+          "product":null
+        }
+      ],
+      "productOptions":[]
+     }
+
+  ]);
   const [idProduct,setIdProduct] = useState(0);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:9196/api/product/all"
-        );
-        setProducts(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "http://localhost:9196/api/product/all"
+  //       );
+  //       setProducts(response.data);
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching products:", error);
+  //     }
+  //   };
 
-    fetchProducts();
-  }, []);
+  //   fetchProducts();
+  // }, []);
+
+
   function handleInfo(){
     setModale(!modale);
     setModalElement("info");
@@ -50,15 +267,15 @@ export default function CardsProductDashboard() {
 
   
   async function deleteProduct(productId: number){
-    try {
-      await axios.delete(`http://localhost:9196/api/product/remove/${productId}`);
-      setProducts(products.filter(product => product.id !== productId));
-      console.log("Le produit a été supprimé avec succès.");
-      setModale(!modale);
-      // console.log(`http://localhost:9196/api/product/remove/${productId}`);
-    } catch (error) {
-      console.error("Erreur lors de la suppression du produit:", error);
-    }
+    // try {
+    //   await axios.delete(`http://localhost:9196/api/product/remove/${productId}`);
+    //   setProducts(products.filter(product => product.id !== productId));
+    //   console.log("Le produit a été supprimé avec succès.");
+    //   setModale(!modale);
+    //   // console.log(`http://localhost:9196/api/product/remove/${productId}`);
+    // } catch (error) {
+    //   console.error("Erreur lors de la suppression du produit:", error);
+    // }
   }
 
 
@@ -75,7 +292,7 @@ export default function CardsProductDashboard() {
         return (
           <div className={classes.cardProductDashboard} key={product.id}>
             <div className={classes.cardImageDashboard}>
-              {/* <img src={product.productImages[0].productImages} alt="" /> */}
+              <img src={product.productImages[0].productImages} alt="" />
             </div>
             <div className={classes.cardInfoDashboard}>
               <p className={classes.titleStyleCardDasboard}>

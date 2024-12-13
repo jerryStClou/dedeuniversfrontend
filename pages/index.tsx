@@ -1,12 +1,15 @@
 import BasicCarousel from "@/components/Carousels/Home/BasicCarousel/BasicCarousel";
 import BigCarousel from "@/components/Carousels/Home/BigCarousel/BigCarousel";
-import DashboardAdmin from "@/components/Dashboard/DashBoardAdmin/DashBoardAdmin";
+import DashboardAdmin from "@/components/Dashboard/DashboardAdmin/DashboardAdmin";
+import DashboardClientElement from "@/components/Dashboard/dashboardClientElement/DashboardClientElement";
+// import DashboardAdmin from "@/components/Dashboard/DashBoardAdmin/DashBoardAdmin";
 import Footer1 from "@/components/Footer/Footer1/Footer1";
 import PromotionForm from "@/components/forms/PromotionForm/PromotionForm";
 import RegisterForm1 from "@/components/forms/RegisterForm/RegisterForm1/RegisterForm1";
 import AddProductPromotion from "@/components/Modal/ProductPromotionModal/AddProductPromotion";
 import EditProductPromotion from "@/components/Modal/ProductPromotionModal/EditProductPromotion";
 import NavBar1 from "@/components/NavBar/NavBar1/NavBar1";
+import ProductDetail from "@/components/ProductDetail/ProductDetail";
 import ShoppingCartElement from "@/components/ShoppingCartElement/ShoppingCartElement";
 import CheckoutForm from "@/components/stripe/CheckoutForm";
 import PaymentPage from "@/components/stripe/PaymentPage";
@@ -190,6 +193,8 @@ export default function index(){
             <NavBar1/>
             <BigCarousel/>
             <BasicCarousel subCategoryId={1}/>
+            {/* <ProductDetail productId={1}/> */}
+            {/* <DashboardAdmin/> */}
             <Footer1/>
             {/* <DashboardAdmin/> */}
             {/* <h1>Home</h1><br /> */}

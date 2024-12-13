@@ -1,12 +1,19 @@
 import {useEffect, useState } from "react";
 import classes from "@/styles/DashboardStyle/Dashboard.module.css";
 import axios from "axios";
-import { ProductSize } from "@/types/type";
+import { ProductSize } from "@/types/types";
 import SizeForm1 from "@/components/forms/SizeForm/SizeForm1/SizeForm1";
 import SizeEdit from "@/components/forms/SizeForm/SizeForm1/SizeEdit";
 import { useRouter } from 'next/router'; // Importer useRouter
 
 export default function DashboardSize(){
+  
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
     const router = useRouter();
     const { id } = router.query; // Récupérer l'ID de la sous-catégorie depuis l'<URL></URL>
     
@@ -21,7 +28,7 @@ export default function DashboardSize(){
     //   const fetchProductSize = async () => {
     //     try {
     //       const response = await axios.get(
-    //         "http://localhost:9196/api/productSize/all/"+productId
+    //         "http://localhost:9197/api/productSize/all/"+productId
     //       );
     //       setProductSizes(response.data);
     //       console.log(response.data);
@@ -49,7 +56,10 @@ export default function DashboardSize(){
             try {
                 // Requête API pour récupérer les produits par sous-catégorie
                 const response = await axios.get(
-                    `http://localhost:9196/api/productSize/all/${productId}`
+                    `http://localhost:9197/api/productSize/all/${productId}`,
+                    {
+                      withCredentials: true,  // Ajout de cette option pour envoyer les cookies
+                    }
                 );
                 setProductSizes(response.data);
                 console.log(response.data);
@@ -79,11 +89,23 @@ export default function DashboardSize(){
       setComponent("edit productSize form");
       setIdProductSize(productSizeId);
     }
+
+    
+    function handleNextDashBoard(){
+      router.push(`/admin/dashboard/promotion/promotion`);
+    }
   
     async function handleRemoveProductSize(productSizeId:number){
       try {
+        const csrfToken = await fetchTokenCsrf();
         const response = await axios.delete(
-          "http://localhost:9196/api/productSize/remove/"+productSizeId
+          "http://localhost:9197/api/productSize/remove/"+productSizeId,
+          {
+              withCredentials: true,  // Pour envoyer les cookies avec la requête
+              headers: {
+                  'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+              }
+          }
         );
         console.log("productSize à été supprimer avec succès:", response.data.id);
         router.reload(); // Recharge la page
@@ -99,12 +121,14 @@ export default function DashboardSize(){
           component === "productSize"?
           (
             <div className={classes.DashboardImageProduit}>
-            <button
-              className={classes.boutonAjoutSousCategorie}
-              onClick={handleProductSizeForm}
-            >
-              Ajouter une nouvelle taille
-            </button>
+              <div className={classes.buttonsDashboard}>
+                  <button
+                    className={classes.boutonAjoutSousCategorie} onClick={handleProductSizeForm}
+                  >
+                    Ajouter une nouvelle taille
+                  </button>
+                  <button className={classes.backButton}>retour</button>
+              </div>
             <p>{productId}</p>
             {
             productSizes.length === 0 ? 
@@ -125,10 +149,10 @@ export default function DashboardSize(){
             }))
             
             }
-            <button className={classes.boutonValiderImageProduit}>
+            <button className={classes.boutonValiderImageProduit} onClick={handleNextDashBoard}>
               Valider les tailles
             </button>
-            <button className={classes.backButton}>retour</button>
+            
           </div>
           ):component === "productSize form"?
           (

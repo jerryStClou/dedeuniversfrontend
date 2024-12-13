@@ -56,29 +56,30 @@
   
      
     .cardInfoDashboard button:hover{
-      box-shadow: 2px 2px 2px 2px #31313089;
+      box-shadow: 2px 2px 20px 5px rgba(0, 0, 0, 0.5);
+      color: black;
     }
     
     
     .infoButton{
-      border: 2px solid #566E0E;
-      background-color: #566E0E;
+      border: 2px solid #317ABA;
+      background-color: #317ABA;
       color: white;
     }
     
    
     
     .editButton{
-      border: 2px solid #485E7A;
-      background-color: #485E7A;
+      border: 2px solid #3DAE6E;
+      background-color: #3DAE6E;
       color: white;
     }
   
     
     
     .deleteButton{
-      border: 2px solid #700D11;
-      background-color: #700D11;
+      border: 2px solid #D24D28;
+      background-color: #D24D28;
       color: white;
     }
     
@@ -201,7 +202,7 @@
   .modalProduct{
     width: 30%;
     /* border: 2px solid purple; */
-    margin-left: 2%;
+    /* margin-left: 2%; */
     /* height: 45vh; */
     display: flex;
     flex-direction: column;
@@ -209,7 +210,7 @@
   }
   
   .modalProduct img{
-    width: 50%;
+    width: 40%;
   }
   
   .infoModalProduct{
@@ -237,11 +238,19 @@
     width: 70%;
     height: 80vh;
   }
+
+  .paragraphModal span{
+    font-weight: bold;
+  }
   
   .contentParagrapheModal{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-direction: column;
+
+  }
+
+  .descriptionTitle{
+    font-weight: bold;
   }
   
   .profilUser{

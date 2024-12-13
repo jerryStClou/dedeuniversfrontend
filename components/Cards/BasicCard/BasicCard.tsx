@@ -6,10 +6,11 @@ import { useState } from "react";
 type BasicCardProps = {
     product:Product;
     width:string;
+    onAddToCart: (product: Product) => void;
   };
   
 
-export default function BasicCard({product,width} : BasicCardProps){
+export default function BasicCard({product,width,onAddToCart,} : BasicCardProps){
     
     const [counter,setCounter]=useState<number>(0);
 
@@ -139,7 +140,7 @@ export default function BasicCard({product,width} : BasicCardProps){
                 </div>
                 <p>{product.stock} produit en stock</p>
                 <p>{product.basePrice}€</p>
-                <button className={classes.addCartButton}>Ajouter au panier</button>
+                <button className={classes.addCartButton}  onClick={() => onAddToCart(product)}>Ajouter au panier</button>
             </div>
         </div>
 

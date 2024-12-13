@@ -1,14 +1,20 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import type { Promotion } from "@/types/types";
 import axios from "axios";
 import classes from "@/styles/DashboardStyle/Dashboard.module.css";
+import type { Promotion } from "@/types/types";
 import PromotionEdit from "@/components/forms/PromotionForm/PromotionEdit";
 import PromotionForm from "@/components/forms/PromotionForm/PromotionForm";
 
 
 export default function Promotion(){
     
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
   const [component,setComponent] = useState("dashboard promotion");
   const [promotions,setPromotions] = useState<Promotion[]>([]);
   const [idPromotion,setIdPromotion] = useState(0);
@@ -19,7 +25,10 @@ export default function Promotion(){
     const fetchPromotions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:9196/api/promotions/all"
+          "http://localhost:9197/api/promotions/all",
+          {
+            withCredentials: true,  // Ajout de cette option pour envoyer les cookies
+          }
         );
         setPromotions(response.data);
         // console.log(response.data);
@@ -63,8 +72,15 @@ export default function Promotion(){
 
   async function handleRemoveSubCateg(promotionId:number){
     try {
+      const csrfToken = await fetchTokenCsrf();
       const response = await axios.delete(
-        "http://localhost:9196/api/promotions/remove/"+promotionId
+        "http://localhost:9197/api/promotions/remove/"+promotionId,
+        {
+            withCredentials: true,  // Pour envoyer les cookies avec la requête
+            headers: {
+                'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+            }
+        }
       );
       console.log("la promotion à été supprimer avec succès:", response.data.id);
       router.reload(); // Recharge la page
@@ -88,11 +104,14 @@ export default function Promotion(){
             type du produit(télé, smatrphone, montre, assiette, ect..) auquel vous
             souhaitez ajouter.
           </p>
-          <button
-            className={classes.boutonAjoutSousCategorie} onClick={handleAddForm}
-          >
-            Ajouter un nouveau type
-          </button>
+            <div className={classes.buttonsDashboard}>
+                  <button
+                    className={classes.boutonAjoutSousCategorie} onClick={handleAddForm}
+                  >
+                    Ajouter une nouvelle promotion
+                  </button>
+                  <button className={classes.backButton}>retour</button>
+              </div>
           <p className={classes.pOu}>Ou</p>
           <p className={classes.pPropositionList}>
             Selectionnez un type déja existant
@@ -140,7 +159,6 @@ export default function Promotion(){
           }))
         
         }
-              <button  className={classes.backButton}>retour</button>
 
         </div>):component == "edit promotion"?
       (

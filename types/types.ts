@@ -11,6 +11,12 @@ export interface Category {
     imageSubCategory:string;
   }
 
+  export interface CategorySubCategory{
+    id:number;
+    category:Category;
+    subCategory:SubCategory;
+  }
+
   export interface ProductImages{
     id:number;
     productImages:string;
@@ -36,7 +42,7 @@ export interface Category {
 
   export interface ProductOption{
     id:number;
-    product:Product;
+    product:null;
     size:ProductSize;
     color:Color;
     material:Material;
@@ -65,8 +71,13 @@ export interface Category {
     titleComment:string;
     note:number;
     imageComment:string;
-    user:User;
-    product:Product
+    user:{
+      imageProfil:string
+    };
+    product:null;
+    createdAt: Date;  // Ajout du type Date pour createdAt
+    updatedAt: Date;  // Ajout du type Date pour updatedAt
+
   }
 
 
@@ -133,4 +144,16 @@ export interface ProductPromotion{
 
 export interface EmailVerification{
   email:string;
+}
+
+
+export interface UserRegister{
+  lastname:string;
+  firstname:string;
+  pseudo:string;
+  imageProfil:string;
+  email:string;
+  password:string;
+  confirmPassword:string;
+
 }

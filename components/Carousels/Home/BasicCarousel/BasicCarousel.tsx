@@ -1,7 +1,7 @@
 import classes from "./BasicCarousel.module.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Product,Comment   } from "@/types/types";
+import { Product,Comment, CartProduct   } from "@/types/types";
 import Image from 'next/image';
 import etoileNoire from '@/public/images/etoile.png';
 import etoileGrise from '@/public/images/etoile2.png';
@@ -29,6 +29,44 @@ export default function BasicCarousel({subCategoryId}:PropsSubCategoryElement){
     
         fetchProduct();
       }, [subCategoryId]);
+
+      
+    const [cart, setCart] = useState<CartProduct[]>([]);
+      
+    useEffect(() => {
+      const cartString = localStorage.getItem('cart');
+      const cartItems = cartString ? JSON.parse(cartString) : [];
+      setCart(cartItems);
+    }, []);
+  
+    const updateCartInLocalStorage = (updatedCart: CartProduct[]) => {
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      setCart(updatedCart);
+    };
+  
+    // Fonction pour ajouter un produit au panier en tenant compte du stock
+    const handleAddToCart = (product: Product) => {
+      const existingCartProduct = cart.find(item => item.id === product.id);
+      const productQuantityInCart = existingCartProduct ? existingCartProduct.quantity : 0;
+  
+      if (productQuantityInCart < product.stock) {
+        const updatedCart = cart.map(item => {
+          if (item.id === product.id) {
+            return { ...item, quantity: (item.quantity || 1) + 1 };
+          }
+          return item;
+        });
+  
+        if (!existingCartProduct) {
+          updatedCart.push({ ...product, quantity: 1 });
+        }
+  
+        updateCartInLocalStorage(updatedCart);
+      } else {
+        alert("Vous avez atteint la quantité maximale disponible pour ce produit.");
+      }
+    };
+  
     
     function handleMoveLeft(){
         if(compteur>0){
@@ -131,8 +169,22 @@ return(
                 //             <button className={classes.addCartButton}>Ajouter au panier</button>
                 //         </div>
                 //     </div>
-
-                <BasicCard product={product} width="4%"/>
+                
+                <div className={
+                          compteur ===0?
+                          classes.basicCard:
+                          compteur === 1?
+                          classes.move1:
+                          compteur ===2?
+                          classes.move2:
+                          compteur ===3?
+                          classes.move3:
+                          classes.move4
+                          }
+                          key={product.id}
+                  >
+                  <BasicCard product={product} width="100%"onAddToCart={handleAddToCart} />
+                </div>
 
 
                 )

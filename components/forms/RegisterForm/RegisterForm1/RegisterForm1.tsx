@@ -9,47 +9,48 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { User } from "@/types/types";
+import { UserRegister } from "@/types/types";
 
 
 export default function RegisterForm1(){
-   
   const router = useRouter();
   
-// type RegisterData = {
-//   lastname: string;
-//   firstname: string;
-//   pseudo: string;
-//   email: string;
-//   password: string;
-//   // roleId: number;
-// };
-    const registerSchema = z.object({
-      lastname: z.string().min(2, { message: "Le nom doit contenir au moins 2 lettres" }),
-      firstname: z.string().min(2, { message: "Le prenom doit contenir au moins 2 lettres" }),
-      pseudo:z.string().min(2, { message: "Le prenom doit contenir au moins 2 lettres" }),
-      imageProfil:z.string(),
-      email: z.string().email({ message: "Email incorrecte!" }),
-      password: z.string().min(12, "Le mot de passe doit contenir au moins 12 caractères."),
-      // roleId:z.number()
-    });
-    
+const passwordSchema = z
+.string()
+.min(12, "Le mot de passe doit contenir au moins 12 caractères.")
+.regex(/[A-Z].*[A-Z]/, "Le mot de passe doit contenir au moins 2 lettres majuscules.")
+.regex(/\d.*\d/, "Le mot de passe doit contenir au moins 2 chiffres.")
+.regex(/[^A-Za-z0-9]/, "Le mot de passe doit contenir au moins 1 caractère spécial.");
+
+const registerSchema = z.object({
+lastname: z.string().min(2, { message: "Le nom doit contenir au moins 2 lettres." }),
+firstname: z.string().min(2, { message: "Le prénom doit contenir au moins 2 lettres." }),
+pseudo: z.string().min(2, { message: "Le pseudo doit contenir au moins 2 lettres." }),
+imageProfil: z.string().optional(),
+email: z.string().email({ message: "Email incorrecte !" }),
+password: passwordSchema,
+confirmPassword: z.string()
+  .min(12, "La confirmation de mot de passe doit contenir au moins 12 caractères.")
+// roleId: z.number().optional(),  // Décommente si nécessaire
+});
+
+
     const {
       register,
       handleSubmit,
       formState: { errors },
-    } = useForm<User>({
+    } = useForm<UserRegister>({
       resolver: zodResolver(registerSchema),
     });
   
-    async function registerUser(data:User) {
+    async function registerUser(data:UserRegister) {
       try {
         const response = await axios.post(
           "http://localhost:9197/api/auth/register",
           data
         );
         console.log(response.data);
-        router.push("auth/login");
+        // router.push("auth/login");
       } catch (error) {
         console.error("Erreur lors de l'inscription:", error);
       }
@@ -133,6 +134,19 @@ export default function RegisterForm1(){
             className={errors.password ? classes.inputError : classes.inputStyle}
           />
           <p className={classes.errorStyle}>{errors.password?.message}</p>
+        </div>
+  
+  
+  
+        <div className={classes.inputDivStyle}>
+          <label htmlFor="confirmPassword">Confirmation de Mot de passe</label>
+          <input
+            type="password"
+            placeholder="Mot de passe"
+            {...register("confirmPassword")}
+            className={errors.confirmPassword ? classes.inputError : classes.inputStyle}
+          />
+          <p className={classes.errorStyle}>{errors.confirmPassword?.message}</p>
         </div>
   
               {/* <input type="hidden" {...register("roleId")} value={2} /> */}

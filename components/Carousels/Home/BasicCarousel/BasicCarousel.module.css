@@ -53,9 +53,9 @@
     width: 4%;
     margin-left: 0.5%;
     margin-right: 0.5%;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
     transition: all 1s ease-out;
 }
 
@@ -145,22 +145,22 @@
     width: 80%;
     height: 5vh;
     cursor: pointer;
-    border: 2px solid #696620;
+    border: 2px solid rgb(223, 173, 26);
     border-radius: 5px;
-    background-color: #696620;
+    background-color: rgb(223, 173, 26);
     font-size: 1.1em;
 }
-
+ 
 .addCartButton:hover{
-    box-shadow: 2px 2px 2px 2px #00000049;
-    background-color: #8d8910;
-    border-color: #8d8910;
+    color: white;
+    box-shadow: -2px 2px 20px 5px rgba(126, 98, 13, 0.5);
 }
 
 .startButtonActive{
     cursor: pointer;
     background-color: green;
 }
+
 
 /* --------------------------------------------Move style----------------------------------------------------------- */
 
@@ -170,9 +170,9 @@
     width: 4%;
     margin-left: 0.5%;
     margin-right: 0.5%;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
     transition: all 1s ease-out;
     transform: translateX(-245px);
 }
@@ -184,9 +184,9 @@
     width: 4%;
     margin-left: 0.5%;
     margin-right: 0.5%;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
     transition: all 1s ease-out;
     transform: translateX(-523px);
 }
@@ -198,9 +198,9 @@
     width: 4%;
     margin-left: 0.5%;
     margin-right: 0.5%;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
     transition: all 1s ease-out;
     transform: translateX(-800px);
 }
@@ -213,9 +213,9 @@
     width: 4%;
     margin-left: 0.5%;
     margin-right: 0.5%;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
     transition: all 1s ease-out;
     transform: translateX(-1100px);
 }

@@ -1,0 +1,117 @@
+.profil{
+    /* border: 2px solid black; */
+    margin: 2%;
+    width: 97%;
+}
+
+.imageProfil{
+    /* border: 2px solid black; */
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.imageProfil img{
+    width: 100%;
+}
+
+.nameProfil{
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+
+.allButtons{
+    display: flex;
+    margin-left: 2%;
+    flex-wrap: wrap;
+    /* border: 2px solid black; */
+    width: 97%;
+}
+
+.allButtons button{
+    width: 30%;
+    height: 20vh;
+    border:2px solid white;
+    border-radius: 9px;
+    background-color: #F0F0F0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+    margin-left: 2%;
+}
+
+
+.allButtons button:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+
+.allButtons button img{
+    width: 5%;
+}
+
+
+
+.allButtons button p{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+
+
+
+
+
+.modal{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.386);
+}
+
+.modalDiv
+{
+    
+    width: 95%;
+    height: 95vh;
+    position: fixed;
+    top: 2.5%;
+    left: 2.5%;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 9px;
+    overflow: auto;
+}
+
+
+.retourButtonStyle
+{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid #1FE379;
+    background-color: #1FE379;
+    cursor: pointer;
+    /* margin: 1%; */
+    margin-right: 2%;
+    font-size: 1em;
+}
+
+.retourButtonStyle:hover
+{
+    background-color: #119951;
+    border-color: #119951;
+    color:white;
+}

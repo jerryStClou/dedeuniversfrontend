@@ -10,8 +10,8 @@ export default function Register(){
 
     
     function validation(){
-        // setComponent("validation form");
-        console.log("yolo");
+        setComponent("validation form");
+        // console.log("yolo");
     }
 
     function registerForm(){
@@ -26,6 +26,8 @@ export default function Register(){
                 component === "email verification"?
                 (
                     <EmailVerificationForm handleEmailVerification={validation}/>
+                //    <RegisterForm1/> 
+
                 ): component === "validation form"?
                 (
                     <ValidationForm handleValidation={registerForm}/>

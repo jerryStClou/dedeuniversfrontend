@@ -14,13 +14,22 @@ interface PropsPromotionEdit{
 
 export default function PromotionEdit({onClick, handlePromotion, promotionId}:PropsPromotionEdit){
     
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
     const [promotion, setPromotion] = useState<Promotion>();
 
     useEffect(() => {
         const fetchPromotion = async () => {
           try {
             const response = await axios.get(
-              "http://localhost:9196/api/promotions/"+promotionId
+              "http://localhost:9197/api/promotions/"+promotionId,
+              {
+                withCredentials: true,  // Ajout de cette option pour envoyer les cookies
+              }
             );
             setPromotion(response.data);
             console.log(response.data);
@@ -87,11 +96,17 @@ export default function PromotionEdit({onClick, handlePromotion, promotionId}:Pr
       startDate: isoStartDate,  
       endDate: isoEndDate,      
     };
-
+    const csrfToken = await fetchTokenCsrf();
     console.log(promotionData);
       const response = await axios.put(
-        "http://localhost:9196/api/promotions/update/"+promotionId,
-        promotionData
+        "http://localhost:9197/api/promotions/update/"+promotionId,
+        promotionData,
+        {
+            withCredentials: true,  // Pour envoyer les cookies avec la requête
+            headers: {
+                'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+            }
+        }
       );
       console.log("La promotion à été modifier avec succès:", response.data.id);
       handlePromotion();

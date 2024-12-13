@@ -16,6 +16,12 @@ interface PropsColorForm {
 
 export default function ColorForm1({onClick, onColorAdded, idProduct}:PropsColorForm){
     
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
   const colorSchema = z.object({
     color: z
       .string()
@@ -37,9 +43,16 @@ export default function ColorForm1({onClick, onColorAdded, idProduct}:PropsColor
 
   async function addColor(data:Color) {
     try {
+      const csrfToken = await fetchTokenCsrf();
       const response = await axios.post(
-        "http://localhost:9196/api/color/add/"+idProduct,
-        data
+        "http://localhost:9197/api/color/add/"+idProduct,
+        data,
+        {
+            withCredentials: true,  // Pour envoyer les cookies avec la requête
+            headers: {
+                'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+            }
+        }
       );
       console.log("couleur ajouté avec succès:", response.data.id);
       onColorAdded(); // Appelez cette fonction après l'ajout de la catégorie

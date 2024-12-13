@@ -38,19 +38,21 @@ export default function LoginForm1() {
   async function loginUser(data: LoginData) {
     try {
       // Envoi de la requête de connexion
-      const response = await axios.post('http://localhost:9196/api/auth/login', data, {
+      const response = await axios.post('http://localhost:9197/api/auth/login', data, {
         withCredentials: true, // S'assurer que les cookies sont envoyés avec la requête
       });
   
       // Les cookies seront ajoutés par le backend, vous n'avez pas besoin de les stocker à nouveau
       // Le backend s'occupe de l'envoi des cookies, il n'est donc pas nécessaire de les stocker côté client
   
-      console.log('Réponse reçue:', response.data);
+      // console.log('Réponse reçue:', response.data);
   
       // Vous pouvez vérifier si les cookies sont effectivement envoyés, mais pas besoin de les manipuler ici
   
       // Rediriger l'utilisateur vers le dashboard après la connexion réussie
-      router.push('/dashboard/dashboardClient/dashboardClient');
+      // router.push('/user/dashboard/dashboardClient/dashboardClient');
+      router.push('/test/Test');
+
       
     } catch (error) {
       console.error('Erreur lors de la connexion:', error);
@@ -72,7 +74,7 @@ export default function LoginForm1() {
           type="email"
           placeholder="Email"
           {...register('username')}
-          className={errors.username ? 'inputError' : 'inputStyle'}
+          className={errors.username ? classes.inputError : classes.inputStyle}
         />
         <p>{errors.username?.message}</p>
       </div>
@@ -83,12 +85,12 @@ export default function LoginForm1() {
           type="password"
           placeholder="Mot de passe"
           {...register('password')}
-          className={errors.password ? 'inputError' : 'inputStyle'}
+          className={errors.password ? classes.inputError : classes.inputStyle}
         />
         <p>{errors.password?.message}</p>
       </div>
 
-      <button type="submit">Se connecter</button>
+      <button type="submit"  className={classes.buttonStyleContact}>Se connecter</button>
     </form>
   );
 }

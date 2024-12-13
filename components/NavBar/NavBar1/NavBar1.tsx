@@ -4,6 +4,7 @@ import classes from "./NavBar1.module.css";
 import NavBarVertical from "../NavBarVertical/NavBarVertical";
 import SearchName from "../../forms/subCategory/SearchName";
 import ButtonNavBar from "../../Buttons/ButtonNavBar/ButtonNavBar";
+import { useRouter } from 'next/router';
 
 export default function NavBar1(){
 
@@ -17,6 +18,9 @@ export default function NavBar1(){
     
     const [isHeaderVisible, setIsHeaderVisible] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
+
+     // Ajouter un état de clé de rafraîchissement
+    const router = useRouter();
 
     const handleDisparitionClick = () => {
         setIsAnimating(true); // Déclenche l'animation pour faire disparaître
@@ -132,6 +136,17 @@ const themeDark = ()=>{
 }
 
 
+const goRegister = ()=>{
+    router.push('/auth/register');
+}
+
+
+
+const goLogin = ()=>{
+    router.push('/auth/login');
+}
+
+
 // const handleDisparitionClick = ()=>{
 //     setDisappearanceBarNav(true);
 // }
@@ -220,8 +235,8 @@ const themeDark = ()=>{
                                     <button onClick={accountActive} className={classes.navBarLink}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
                                     </button>
-                                    <button className={classes.accountButton}>Login</button>
-                                    <button className={classes.accountButton}>register</button>
+                                    <button className={classes.accountButton} onClick={goLogin}>Login</button>
+                                    <button className={classes.accountButton} onClick={goRegister}>register</button>
                                     </>
                                 ):
                                 (null)

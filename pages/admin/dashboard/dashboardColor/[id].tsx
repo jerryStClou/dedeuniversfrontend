@@ -8,6 +8,14 @@ import { useRouter } from 'next/router'; // Importer useRouter
 // import DashboardMaterial from "../DashboardMaterial/DashboardMaterial";
 
 export default function DashboardColor(){
+  
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
+
     const router = useRouter();
     const { id } = router.query; // Récupérer l'ID de la sous-catégorie depuis l'<URL></URL>
     
@@ -18,22 +26,22 @@ export default function DashboardColor(){
     const [colors, setColors] = useState<Color[]>([]);
     const [idColor, setIdColor] = useState(0);
 
-    // useEffect(() => {
-    //   const fetchColor = async () => {
-    //     try {
-    //       const response = await axios.get(
-    //         "http://localhost:9196/api/color/all/"+productId
-    //       );
-    //       setColors(response.data);
-    //       console.log(response.data);
-    //       console.log("hello world");
-    //     } catch (error) {
-    //       console.error("Error fetching Color:", error);
-    //     }
-    //   };
+    useEffect(() => {
+      const fetchColor = async () => {
+        try {
+          const response = await axios.get(
+            "http://localhost:9197/api/color/all/"+productId
+          );
+          setColors(response.data);
+          console.log(response.data);
+          console.log("hello world");
+        } catch (error) {
+          console.error("Error fetching Color:", error);
+        }
+      };
   
-    //   fetchColor();
-    // }, []);
+      fetchColor();
+    }, []);
 
 
     
@@ -49,7 +57,10 @@ export default function DashboardColor(){
             try {
                 // Requête API pour récupérer les produits par sous-catégorie
                 const response = await axios.get(
-                    `http://localhost:9196/api/color/all/${productId}`
+                    `http://localhost:9197/api/color/all/${productId}`,
+                    {
+                      withCredentials: true,  // Ajout de cette option pour envoyer les cookies
+                    }
                 );
                 setColors(response.data);
                 console.log(response.data);
@@ -82,12 +93,20 @@ export default function DashboardColor(){
 
     function handleNextDashBoard(){
       setComponent("dashboard material");
+      router.push(`/admin/dashboard/dashboardMaterial/${productId}`);
     }
   
     async function handleRemoveColor(ColorId:number){
       try {
+        const csrfToken = await fetchTokenCsrf();
         const response = await axios.delete(
-          "http://localhost:9196/api/color/remove/"+ColorId
+          "http://localhost:9197/api/color/remove/"+ColorId,
+          {
+              withCredentials: true,  // Pour envoyer les cookies avec la requête
+              headers: {
+                  'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+              }
+          }
         );
         console.log("color à été supprimer avec succès:", response.data.id);
         router.reload(); // Recharge la page
@@ -103,12 +122,15 @@ export default function DashboardColor(){
           component === "color"?
           (
             <div className={classes.DashboardImageProduit}>
-            <button
-              className={classes.boutonAjoutSousCategorie}
-              onClick={handleColorForm}
-            >
-              Ajouter une nouvelle couleur
-            </button>
+                <div className={classes.buttonsDashboard}>
+                  <button
+                    className={classes.boutonAjoutSousCategorie} onClick={handleColorForm}
+                  >
+                    Ajouter une nouvelle couleur
+                  </button>
+                  <button className={classes.backButton}>retour</button>
+              </div>
+
             <p>{productId}</p>
             {
             colors.length === 0 ? 

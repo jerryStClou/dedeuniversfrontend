@@ -13,12 +13,13 @@
 {
     display: flex;
     justify-content: space-between;
+    /* border: 2px solid blue; */
 }
 
 
 .imageProduct
 {
-    /* border: 1px solid black; */
+    /* border: 1px solid pink; */
     width: 60%;
     /* height: 80vh; */
     margin: 1%;
@@ -30,17 +31,17 @@
 
 .theImageProduct
 {
-    width: 80%;
+    width: 100%;
     background: white;
     display: flex;
     justify-content: center;
-
+    /* border: 1px solid blue; */
     /* height: 80vh; */
 }
 
 .theImageProduct img
 {
-    width: 67%;
+    width: 100%;
 }
 
 .menuProduct
@@ -72,13 +73,113 @@
     margin-bottom: 1%;
 }
 
+.noteProduct{
+    display: flex;
+    /* border: 2px solid lightgreen; */
+    width: 95%;
+    /* padding: 2%; */
+    justify-content: center;
+    align-items: center;
+}
 
-.menuProduct button
+.noteProduct p{
+    font-size: 1.1em;
+    margin-right: 2%;
+}
+
+.colors{
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2%;
+}
+
+.colors p{
+    font-size: 1.2em;
+}
+
+.color{
+    border-width: 2px;
+    border-style: solid;
+    /* border: 2px solid lightblue; */
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-left: 2%;
+    cursor: pointer;
+}
+
+.materiaux{
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.materiaux p{
+    font-size: 1.2em;
+}
+
+.theMateriaux{
+    border: 2px solid black;
+    width: 20%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    margin-left: 2%;
+    cursor: pointer;
+}
+
+.allButtonsProductDetails{
+    /* border: 2px solid black; */
+    width: 99%;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.buttonProductDetail{
+    border: 2px solid white;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    margin: 2%;
+    border-radius: 7px;
+    padding-top: 2%;
+}
+
+.buttonProductDetail:hover{
+    transform: scale(1.03);
+    transition: all 0.1s ease-out;
+    box-shadow: 2px 2px 20px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+.buttonProductDetail button
 {
-    width: 80%;
-    height: 7vh;
+    width: 70px;
+    height: 70px;
     cursor: pointer;
     margin: 1%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    background-color: white;
+}
+
+.buttonProductDetail button img{
+    width: 60%;
 }
 
 .panierStyleLiens
@@ -223,7 +324,7 @@
     background-color: white;
     width: 10%;
     /* margin-bottom: 5%; */
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 6px;
     display: flex;
     justify-content: center;
@@ -251,23 +352,32 @@
 .detailMenuContent
 {
     background-color: #fff;
-    width: 90%;
-    height: 90vh;
+    width: 96%;
+    height: 96vh;
     z-index: 300;
     position: fixed;
-    top: 5%;
-    left: 5%;
+    top: 2%;
+    left: 2%;
+    overflow: auto;
 }
 
+.backButtonDiv{
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content: end;
+    margin-top: 0.5%;
+}
 
 .retourButtonStyle
 {
-    width: 15%;
-    height: 5vh;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
     border: 1px solid #1FE379;
     background-color: #1FE379;
     cursor: pointer;
-    margin: 1%;
+    /* margin: 1%; */
+    margin-right: 2%;
     font-size: 1em;
 }
 

@@ -15,6 +15,12 @@ interface PropsPromotionForm {
 
 export default function PromotionForm({onClick, handlePromotion}:PropsPromotionForm){
     
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
   const promotionSchema = z.object({
     code: z.string().min(1),
     description: z.string().min(1),
@@ -69,10 +75,17 @@ export default function PromotionForm({onClick, handlePromotion}:PropsPromotionF
     };
 
     console.log(promotionData);
-    
+
+    const csrfToken = await fetchTokenCsrf();
     const response = await axios.post(
-      "http://localhost:9196/api/promotions/add",
-      promotionData
+      "http://localhost:9197/api/promotions/add",
+      promotionData,
+      {
+          withCredentials: true,  // Pour envoyer les cookies avec la requête
+          headers: {
+              'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+          }
+      }
     );
     console.log("La promotion a été ajoutée avec succès:", response.data.id);
     handlePromotion();

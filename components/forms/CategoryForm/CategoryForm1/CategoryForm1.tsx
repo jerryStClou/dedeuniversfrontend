@@ -15,16 +15,16 @@ interface PropsCategoryForm {
 }
 export default function CategoryForm1({onClick, onCategoryAdded}:PropsCategoryForm) {
 
+  
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
+
   const categorieSchema = z.object({
-    nameCategory: z
-      .string()
-      .min(2, {
-        message: "Le nom de la categorie doit contenir au moins 2 lettres",
-      })
-      .regex(
-        /^[a-zA-Z\u00C0-\u00FF\s]*$/,
-        "Le nom de la catégorie ne doit contenir que des lettres et des espaces"
-      ),
+    nameCategory: z.string(),
   });
   const {
     register,
@@ -36,9 +36,16 @@ export default function CategoryForm1({onClick, onCategoryAdded}:PropsCategoryFo
 
   async function addCategorie(data:Category) {
     try {
+      const csrfToken = await fetchTokenCsrf();
       const response = await axios.post(
-        "http://localhost:9196/api/category/add",
-        data
+        "http://localhost:9197/api/category/add",
+        data,
+        {
+            withCredentials: true,  // Pour envoyer les cookies avec la requête
+            headers: {
+                'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+            }
+        }
       );
       console.log("categorie ajouté avec succès:", response.data.id);
       onCategoryAdded(); // Appelez cette fonction après l'ajout de la catégorie

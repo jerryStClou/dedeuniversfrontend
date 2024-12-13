@@ -1,5 +1,5 @@
 
-import { Product,Comment  } from "@/types/type";
+import { Product,Comment  } from "@/types/types";
 import classes from "./SimilarProduct.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";

@@ -17,13 +17,22 @@ interface PropsMaterialForm {
 
 export default function MaterialEdit({onClick, onMaterialAdded, materialId}:PropsMaterialForm){
     
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
     const [materialProduct, setMaterialProduct] = useState<Material>();
 
     useEffect(() => {
         const fetchMaterial = async () => {
           try {
             const response = await axios.get(
-              "http://localhost:9196/api/material/"+materialId
+              "http://localhost:9197/api/material/"+materialId,
+              {
+                withCredentials: true,  // Ajout de cette option pour envoyer les cookies
+              }
             );
             setMaterialProduct(response.data);
             console.log(response.data);
@@ -59,9 +68,16 @@ export default function MaterialEdit({onClick, onMaterialAdded, materialId}:Prop
   
     async function updateMaterial(data:Material) {
       try {
-        const response = await axios.post(
-          "http://localhost:9196/api/material/update/"+materialId,
-          data
+        const csrfToken = await fetchTokenCsrf();
+        const response = await axios.put(
+          "http://localhost:9197/api/material/update/"+materialId,
+          data,
+          {
+              withCredentials: true,  // Pour envoyer les cookies avec la requête
+              headers: {
+                  'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+              }
+          }
         );
         console.log("couleur ajouté avec succès:", response.data.id);
         onMaterialAdded(); // Appelez cette fonction après l'ajout de la catégorie

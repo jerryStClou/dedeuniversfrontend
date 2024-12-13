@@ -3,10 +3,17 @@ import { useEffect, useState } from "react";
 import classes from "@/styles/DashboardStyle/Dashboard.module.css";
 import axios from "axios";
 import { useRouter } from 'next/router'; // Importer useRouter
-import { ProductImages } from "@/types/type";
+import { ProductImages } from "@/types/types";
 import ProductImageForm1 from "@/components/forms/ProductImageForm/ProductImageForm1/ProductImageForm1";
 import ProductImageEdit from "@/components/forms/ProductImageForm/ProductImageForm1/ProductImageEdit";
 export default function DashboardProductImages(){
+  
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
     const router = useRouter();
     const { id } = router.query; // Récupérer l'ID de la sous-catégorie depuis l'URL
     
@@ -29,7 +36,10 @@ export default function DashboardProductImages(){
             try {
                 // Requête API pour récupérer les produits par sous-catégorie
                 const response = await axios.get(
-                    `http://localhost:9196/api/productImage/all/${idProduct}`
+                    `http://localhost:9197/api/productImage/all/${idProduct}`,
+                    {
+                      withCredentials: true,  // Ajout de cette option pour envoyer les cookies
+                    }
                 );
                 setProductImages(response.data);
                 console.log(response.data);
@@ -64,12 +74,20 @@ export default function DashboardProductImages(){
     
       function handleDashBoardColor(){
         setComponent("dashboard color");
+        router.push(`/admin/dashboard/dashboardColor/${idProduct}`);
       }
     
       async function handleRemoveProductImg(productImagesId:number){
+        const csrfToken = await fetchTokenCsrf();
         try {
           const response = await axios.delete(
-            "http://localhost:9196/api/productImage/remove/"+productImagesId
+            "http://localhost:9197/api/productImage/remove/"+productImagesId,
+            {
+                withCredentials: true,  // Pour envoyer les cookies avec la requête
+                headers: {
+                    'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+                }
+            }
           );
           console.log("l'image du produit à été supprimer avec succès:", response.data.id);
           router.reload(); // Recharge la page
@@ -88,12 +106,14 @@ export default function DashboardProductImages(){
       component === "product images"?
       (
         <div className={classes.DashboardImageProduit}>
-        <button
-          className={classes.boutonAjoutSousCategorie}
-          onClick={handleProductImageForm}
-        >
-          Ajouter une nouvelle image
-        </button>
+            <div className={classes.buttonsDashboard}>
+                  <button
+                    className={classes.boutonAjoutSousCategorie} onClick={handleProductImageForm}
+                  >
+                    Ajouter une nouvelle image
+                  </button>
+                  <button className={classes.backButton}>retour</button>
+              </div>
         {
         
         productImages.length === 0 ? 
@@ -117,7 +137,7 @@ export default function DashboardProductImages(){
         <button className={classes.boutonValiderImageProduit} onClick={handleDashBoardColor}>
           Valider les images produits
         </button>
-        <button className={classes.backButton}>retour</button>
+        
       </div>
       ):component === "Product images form"?
       (

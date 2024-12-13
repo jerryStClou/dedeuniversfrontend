@@ -63,7 +63,7 @@ export default function ShoppingCartElement() {
   return (
     <div>
       <h1 className={classes.titrePanierPStyle}>Panier</h1>
-      <button onClick={clearCart}>Vider le panier</button>
+      <button onClick={clearCart} className={classes.emptyCartButton}>Vider le panier</button>
       <div className={classes.ensemble}>
         <div className={classes.lePanier}>
           {cart.length === 0 ? (
@@ -82,13 +82,16 @@ export default function ShoppingCartElement() {
                   </p>
                   <p className={classes.infoStyle}>
                     <span className={classes.spanNomPanier}>
-                      Prix du produit: {product.basePrice}€
+                      Prix du produit: {product.basePrice * product.quantity}€
                     </span>
                   </p>
-                  <button onClick={() => increaseQuantity(product.id)}>+</button>
-                  <button onClick={() => decreaseQuantity(product.id)}>-</button>
-                  <p>Quantité: {product.quantity}</p>
-                  <button onClick={() => removeFromCart(product.id)}>Supprimer</button>
+                  
+                  <div className={classes.divQuantity}>
+                    <button className={classes.quantityButton} onClick={() => increaseQuantity(product.id)}>+</button>
+                    <p className={classes.numberQuantity}>{product.quantity}</p>
+                    <button className={classes.quantityButton}  onClick={() => decreaseQuantity(product.id)}>-</button>
+                  </div>
+                  <button onClick={() => removeFromCart(product.id)}  className={classes.deleteButton}>Supprimer</button>
                 </div>
               </div>
             ))

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import classes from "./ProductDetail.module.css";
 import axios from "axios";
-import { ProductImages } from "@/types/type";
+import { ProductImages } from "@/types/types";
 
 type PropsProductImageDetail = {
   productId: number | undefined;
@@ -18,20 +18,45 @@ type PropsProductImageDetail = {
 
 export default function ProductImageDetail({productId,mouseEnter1,mouseEnter2,mouseEnter3,mouseEnter4,mouseEnter5,mouseEnter6,mouseEnter7,numeroImage}:PropsProductImageDetail){
   
-  const [productImages, setProductImages] = useState<ProductImages[]>();
-   
-useEffect(() => {
-  const fetchProduct = async () => {
-    try {
-      const response = await axios.get(`http://localhost:9196/api/productImage/all/${productId}`);
-      setProductImages(response.data);
-    } catch (error) {
-      console.error('Error fetching product images:', error);
+  const [productImages, setProductImages] = useState<ProductImages[]>([
+    {
+      "id":1,
+      "productImages":"https://m.media-amazon.com/images/S/aplus-media-library-service-media/1130a6c8-f261-4a7c-9101-30932e5ea558.__CR0,0,970,600_PT0_SX970_V1___.jpg",
+      "typeProductImages":"card",
+      "product":null
+    },
+    {
+      "id":1,
+      "productImages":"https://m.media-amazon.com/images/S/aplus-media-library-service-media/8e33a0e9-7fdc-46a1-87e9-e995b1594eff.__CR0,0,970,600_PT0_SX970_V1___.jpg",
+      "typeProductImages":"card",
+      "product":null
+    },
+    {
+      "id":1,
+      "productImages":"https://m.media-amazon.com/images/S/aplus-media-library-service-media/f6d5ee9c-5a8d-4b00-ae7f-27b180f63354.__CR0,0,970,600_PT0_SX970_V1___.jpg",
+      "typeProductImages":"card",
+      "product":null
+    },
+    {
+      "id":1,
+      "productImages":"https://m.media-amazon.com/images/S/aplus-media-library-service-media/71a3790a-07fd-4cba-910c-c3df8b4f5f80.__CR0,0,970,600_PT0_SX970_V1___.jpg",
+      "typeProductImages":"card",
+      "product":null
     }
-  };
+  ]);
+   
+// useEffect(() => {
+//   const fetchProduct = async () => {
+//     try {
+//       const response = await axios.get(`http://localhost:9196/api/productImage/all/${productId}`);
+//       setProductImages(response.data);
+//     } catch (error) {
+//       console.error('Error fetching product images:', error);
+//     }
+//   };
 
-  fetchProduct();
-}, [productId]);
+//   fetchProduct();
+// }, [productId]);
 
 
   return(

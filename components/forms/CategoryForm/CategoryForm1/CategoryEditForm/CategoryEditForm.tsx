@@ -13,7 +13,16 @@ type PropsCategoryEditForm = {
   };
   
 export default function CategoryEditForm({categoryId,onClick, onCategoryAdded}:PropsCategoryEditForm){
+  
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
+
     const [category,setCategory] = useState<Category>();
+
   const categorieSchema = z.object({
     nameCategory: z
       .string()
@@ -38,7 +47,10 @@ export default function CategoryEditForm({categoryId,onClick, onCategoryAdded}:P
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:9196/api/category/"+categoryId
+          "http://localhost:9196/api/category/"+categoryId,
+          {
+            withCredentials: true,  // Ajout de cette option pour envoyer les cookies
+          }
         );
         setCategory(response.data);
         console.log(response.data);
@@ -53,9 +65,16 @@ export default function CategoryEditForm({categoryId,onClick, onCategoryAdded}:P
 
   async function categoryEdit(data:Category) {
     try {
+      const csrfToken = await fetchTokenCsrf();
       const response = await axios.put(
         "http://localhost:9196/api/category/update/"+categoryId,
-        data
+        data,
+        {
+            withCredentials: true,  // Pour envoyer les cookies avec la requête
+            headers: {
+                'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+            }
+        }
       );
       console.log("categorie ajouté avec succès:", response.data.id);
       onCategoryAdded(); // Appelez cette fonction après l'ajout de la catégorie

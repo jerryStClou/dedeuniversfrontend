@@ -17,13 +17,23 @@ interface PropsProductSizeForm {
 
 export default function SizeEdit({onClick, onProductSizeAdded, productSizeId}:PropsProductSizeForm){
     
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
+
     const [productSize, setProductSize] = useState<ProductSize>();
 
     useEffect(() => {
         const fetchColor = async () => {
           try {
             const response = await axios.get(
-              "http://localhost:9196/api/productSize/"+productSizeId
+              "http://localhost:9197/api/productSize/"+productSizeId,
+              {
+                withCredentials: true,  // Ajout de cette option pour envoyer les cookies
+              }
             );
             setProductSize(response.data);
             console.log(response.data);
@@ -37,15 +47,7 @@ export default function SizeEdit({onClick, onProductSizeAdded, productSizeId}:Pr
       }, []);
 
     const productSizeSchema = z.object({
-        productSize: z
-        .string()
-        .min(2, {
-          message: "Le nom de la taille du produit doit contenir au moins 2 lettres",
-        })
-        .regex(
-          /^[a-zA-Z\u00C0-\u00FF\s]*$/,
-          "Le nom de la taille du produit ne doit contenir que des lettres et des espaces"
-        ),
+        productSize: z.string(),
         influenceProductSizePrice:z.number(),
         influenceProductSizeWeight:z.number()
     });
@@ -59,9 +61,16 @@ export default function SizeEdit({onClick, onProductSizeAdded, productSizeId}:Pr
   
     async function updateProductSize(data:ProductSize) {
       try {
-        const response = await axios.post(
-          "http://localhost:9196/api/productSize/update/"+productSizeId,
-          data
+        const csrfToken = await fetchTokenCsrf();
+        const response = await axios.put(
+          "http://localhost:9197/api/productSize/update/"+productSizeId,
+          data,
+          {
+              withCredentials: true,  // Pour envoyer les cookies avec la requête
+              headers: {
+                  'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+              }
+          }
         );
         console.log("couleur ajouté avec succès:", response.data.id);
         onProductSizeAdded(); // Appelez cette fonction après l'ajout de la catégorie

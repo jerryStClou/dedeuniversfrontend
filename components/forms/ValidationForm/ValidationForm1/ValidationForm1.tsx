@@ -21,7 +21,7 @@ export default function ValidationForm({handleValidation}:PropsValidationForm) {
     code: string;
   };
 
-  const registerSchema = z.object({
+  const validationSchema = z.object({
     code: z.string(),
   });
 
@@ -30,14 +30,14 @@ export default function ValidationForm({handleValidation}:PropsValidationForm) {
     handleSubmit,
     formState: { errors },
   } = useForm<ValidationData>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(validationSchema),
   });
 
   async function loginUser(data:ValidationData) {
     try {
       const response = await axios.post(
         "http://localhost:9197/api/auth/activation",
-        data.code
+        data
       );
       console.log(response.data);
       handleValidation();

@@ -31,11 +31,11 @@ export default function EmailVerificationForm({handleEmailVerification}:PropsEma
 
   async function emailVerifySubmit(data:EmailVerification) {
     try {
-    //   const response = await axios.post(
-    //     "http://localhost:9197/api/auth/generate/validation-code",
-    //     data.email
-    //   );
-    //   console.log("l'email à été vérifier avec succès:", response.data.id);
+      const response = await axios.post(
+        "http://localhost:9197/api/auth/generate/validation-code",
+        data
+      );
+      console.log("l'email à été vérifier avec succès:", response.data.id);
       handleEmailVerification(); // Appelez cette fonction après l'ajout de la catégorie
       const email = data.email;
     console.log(data.email);

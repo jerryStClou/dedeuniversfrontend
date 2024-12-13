@@ -1,6 +1,6 @@
 import { useState } from "react";
 import classes from "./DashboardClient.module.css";
-export default function DashboardClient(){
+export default function DashboardClientElement2(){
     const [modale,setModale]=useState(false);
     const [modalElement,setModalElement]=useState("");
 

@@ -8,6 +8,12 @@ import { useRouter } from 'next/router'; // Importer useRouter
 
 export default function DashboardProduct(){
    
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
     const router = useRouter();
     const { id } = router.query; // Récupérer l'ID de la sous-catégorie depuis l'URL
     const [component,setComponent] = useState("dashboard product");
@@ -33,7 +39,10 @@ export default function DashboardProduct(){
             try {
                 // Requête API pour récupérer les produits par sous-catégorie
                 const response = await axios.get(
-                    `http://localhost:9197/api/product/all/${idSubCategory}`
+                    `http://localhost:9197/api/product/all/${idSubCategory}`,
+                    {
+                      withCredentials: true,  // Ajout de cette option pour envoyer les cookies
+                    }
                 );
                 setProducts(response.data);
                 console.log(response.data);
@@ -47,7 +56,7 @@ export default function DashboardProduct(){
   
   
     function handleSelecProduct(productId:number){
-      router.push(`/dashboardProductImages/${productId}`);
+      router.push(`/admin/dashboard/dashboardProductImages/${productId}`);
     }
   
     
@@ -72,8 +81,15 @@ export default function DashboardProduct(){
   
     async function handleRemoveProduct(productId:number){
       try {
+        const csrfToken = await fetchTokenCsrf();
         const response = await axios.delete(
-          "http://localhost:9196/api/product/remove/"+productId
+          "http://localhost:9197/api/product/remove/"+productId,
+          {
+              withCredentials: true,  // Pour envoyer les cookies avec la requête
+              headers: {
+                  'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+              }
+          }
         );
         console.log("la sous categorie à été supprimer avec succès:", response.data.id);
         router.reload(); // Recharge la page
@@ -90,16 +106,15 @@ export default function DashboardProduct(){
         component === "dashboard product"?
         (
           <div className={classes.DashboardSousCategorie}>
-            <p className={classes.pIntroDashboardSousCategorie}>
-              Pour l'ajout de vos produits nous avons besoins d'abord de connaître le
-              type du produit(télé, smatrphone, montre, assiette, ect..) auquel vous
-              souhaitez ajouter.
-            </p>
-            <button
-              className={classes.boutonAjoutSousCategorie} onClick={handleAddForm}
-            >
-              Ajouter un nouveau produit
-            </button>
+                  
+                <div className={classes.buttonsDashboard}>
+                    <button
+                      className={classes.boutonAjoutSousCategorie} onClick={handleAddForm}
+                    >
+                      Ajouter un nouveau produit
+                    </button>
+                    <button className={classes.backButton}>retour</button>
+                </div>
             <p className={classes.pOu}>Ou</p>
             <p className={classes.pPropositionList}>
               Selectionnez un produit déja existant
@@ -144,7 +159,6 @@ export default function DashboardProduct(){
             }))
           
           }
-                <button className={classes.backButton}>retour</button>
   
           </div>): component === "add product form"?
         (

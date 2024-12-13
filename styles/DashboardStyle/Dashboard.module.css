@@ -10,6 +10,14 @@
     color: #616161;
 }
 
+.buttonsDashboard{
+    display: flex;
+    /* border: 2px solid black; */
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
 .boutonAjoutSousCategorie{
     width: 30%;
     height: 10vh;
@@ -41,15 +49,21 @@
     margin-bottom: 1%;
 }
 
-/* 
+
 .cardsDashboardSousCategorie{
-    border: 2px solid black;
-} */
+    /* border: 2px solid black; */
+    width: 100%;
+    margin-left: 0;
+}
 
 .cardDashboardSousCategorie{
-    border: 2px solid #43e1ed;
+    /* border: 2px solid #000000; */
     padding: 1%;
     display: flex;
+    width: 100%;
+    margin-top: 2%;
+    border-radius: 15px;
+    box-shadow: -5px 5px 5px 5px rgba(38, 38, 38, 0.289);
 }
 
 .imageCardDashboardSousCategorie{
@@ -101,6 +115,7 @@
     border-color: rgb(20, 63, 86);
     background-color: rgb(20, 63, 86);
     color: white;
+    box-shadow: -2px 2px 20px 5px rgba(20, 63, 86, 0.5);
 }
 
 .boutonModifier{
@@ -112,6 +127,7 @@
     border-color: rgb(11, 93, 43);
     background-color: rgb(11, 93, 43);
     color: white;
+    box-shadow: -2px 2px 20px 5px rgba(11, 93, 43, 0.5);
 }
 
 .boutonSupprimer{
@@ -124,23 +140,26 @@
     border-color: rgba(92, 23, 23, 0.852);
     background-color: rgba(92, 23, 23, 0.852);
     color: white;
+    box-shadow: -2px 2px 20px 5px rgba(92, 23, 23, 0.5);
 }
 
 
 .backButton{
     width: 15%;
-    height: 6vh;
+    height: 7vh;
     cursor: pointer;
-    background-color: rgb(59, 130, 246);
-    border:1px solid rgb(59,130,246);
+    background-color: rgb(128, 33, 238);
+    border:1px solid rgb(128, 33, 238);
     border-radius: 6px;
+    margin-left: 3%;
+    font-size: 1.2em;
 }
 
 .backButton:hover{
-    background-color: rgb(34, 48, 70);
-    border-color: rgb(34, 48, 70);
+    background-color: rgb(66, 18, 120);
+    border-color: rgb(66, 18, 120);
     color: white;
-    box-shadow: -5px 5px 5px rgba(38, 38, 38, 0.289);
+    box-shadow: -5px 5px 5px rgba(66, 18, 120, 0.289);
 }
 
 .modalBackground{

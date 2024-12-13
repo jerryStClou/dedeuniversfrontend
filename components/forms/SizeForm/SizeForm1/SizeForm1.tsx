@@ -16,16 +16,14 @@ interface PropsProductSizeForm {
 
 export default function SizeForm1({onClick, onProductSizeAdded, idProduct}:PropsProductSizeForm){
     
+  const fetchTokenCsrf = async () => {
+    const response = await axios.get("http://localhost:9197/api/csrf-token", {
+      withCredentials: true,
+  });
+    return response.data.csrfToken;
+};
     const productSizeSchema = z.object({
-        productSize: z
-        .string()
-        .min(2, {
-          message: "Le nom de la taille du produit doit contenir au moins 2 lettres",
-        })
-        .regex(
-          /^[a-zA-Z\u00C0-\u00FF\s]*$/,
-          "Le nom de la taille du produit ne doit contenir que des lettres et des espaces"
-        ),
+        productSize: z.string(),
         influenceProductSizePrice:z.number(),
         influenceProductSizeWeight:z.number()
     });
@@ -39,9 +37,16 @@ export default function SizeForm1({onClick, onProductSizeAdded, idProduct}:Props
   
     async function addProductSize(data:ProductSize) {
       try {
+        const csrfToken = await fetchTokenCsrf();
         const response = await axios.post(
-          "http://localhost:9196/api/productSize/add/"+idProduct,
-          data
+          "http://localhost:9197/api/productSize/add/"+idProduct,
+          data,
+          {
+              withCredentials: true,  // Pour envoyer les cookies avec la requête
+              headers: {
+                  'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+              }
+          }
         );
         console.log("couleur ajouté avec succès:", response.data.id);
         onProductSizeAdded(); // Appelez cette fonction après l'ajout de la catégorie

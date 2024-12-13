@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "@/styles/DashboardStyle/Dashboard.module.css";
-import { SubCategory } from "@/types/type";
+import { SubCategory } from "@/types/types";
 import SubCategoryEditForm from "@/components/forms/SubCategoryForm/SubCategoryForm1/SubCategoryEditForm";
 import SubCategoryForm1 from "@/components/forms/SubCategoryForm/SubCategoryForm1/SubCategoryForm1";
 import axios from "axios";
@@ -10,23 +10,25 @@ export default function subCategory(){
     
   const [component,setComponent] = useState("dashboard sub category");
   const [subCategories,setSubCategories] = useState<SubCategory[]>([
-    {
-      "id":1,
-      "imageSubCategory":"https://static.fnac-static.com/multimedia/Images/FR/MDM/2d/77/fd/16611117/1505-1/tsp20240922023812/Ecran-PC-Huawei-AD80HW-23-8-Full-HD-Noir.jpg",
-      "nameSubCategory":"Ecran gamer"
-    }
+    // {
+    //   "id":1,
+    //   "imageSubCategory":"https://static.fnac-static.com/multimedia/Images/FR/MDM/2d/77/fd/16611117/1505-1/tsp20240922023812/Ecran-PC-Huawei-AD80HW-23-8-Full-HD-Noir.jpg",
+    //   "nameSubCategory":"Ecran gamer"
+    // }
 
   ]);
   const [idSubCategory,setIdSubCategory] = useState(0);
-  const [refreshKey, setRefreshKey] = useState(0); // Ajouter un état de clé de rafraîchissement
   const router = useRouter();
 
   
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchSubCategories = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:9196/api/subCategory/all"
+          "http://localhost:9197/api/subCategory/all",
+          {
+            withCredentials: true,  // Ajout de cette option pour envoyer les cookies
+          }
         );
         setSubCategories(response.data);
         // console.log(response.data);
@@ -35,14 +37,14 @@ export default function subCategory(){
       }
     };
 
-    fetchProducts();
+    fetchSubCategories();
   }, []);
 
 
   function handleSelecSubCateg(idSubCategorie:number){
     // setIdSubCategory(idSubCategorie);
     // console.log("dashboard product");
-    router.push(`/dashboardProduct/${idSubCategorie}`);
+    router.push(`/admin/dashboard/dashboardProduct/${idSubCategorie}`);
   }
 
   function backToDashSubCateg(){
@@ -66,8 +68,24 @@ export default function subCategory(){
 
   async function handleRemoveSubCateg(categoryId:number){
     try {
+      
+          // Récupérer le token CSRF depuis le cookie
+          const csrfToken = document.cookie
+          .split(';')
+          .find(cookie => cookie.trim().startsWith('XSRF-TOKEN='))?.split('=')[1];
+
+      if (!csrfToken) {
+          console.error("Token CSRF manquant");
+          return;
+      }
       const response = await axios.delete(
-        "http://localhost:9196/api/subCategory/remove/"+categoryId
+        "http://localhost:9197/api/subCategory/remove/"+categoryId,
+        {
+            withCredentials: true,  // Pour envoyer les cookies avec la requête
+            headers: {
+                'X-XSRF-TOKEN': csrfToken  // Ajouter le token CSRF dans l'en-tête
+            }
+        }
       );
       console.log("la sous categorie à été supprimer avec succès:", response.data.id);
       router.reload(); // Recharge la page
@@ -89,11 +107,14 @@ export default function subCategory(){
             type du produit(télé, smatrphone, montre, assiette, ect..) auquel vous
             souhaitez ajouter.
           </p>
-          <button
-            className={classes.boutonAjoutSousCategorie} onClick={handleAddForm}
-          >
-            Ajouter un nouveau type
-          </button>
+          <div className={classes.buttonsDashboard}>
+              <button
+                className={classes.boutonAjoutSousCategorie} onClick={handleAddForm}
+              >
+                Ajouter un nouveau type
+              </button>
+              <button className={classes.backButton}>retour</button>
+          </div>
           <p className={classes.pOu}>Ou</p>
           <p className={classes.pPropositionList}>
             Selectionnez un type déja existant
@@ -139,8 +160,6 @@ export default function subCategory(){
           }))
         
         }
-              <button  className={classes.backButton}>retour</button>
-
         </div>):component == "edit sub category form"?
       (
         <>
